@@ -1,0 +1,203 @@
+        <aside
+          class="controls"
+          id="adjustmentsPanel"
+          role="tabpanel"
+          aria-labelledby="showAdjustmentsPanel"
+          data-i18n-attr="aria-label:cg.static.photoAdjustments"
+        >
+          <details class="adjustment-group" open>
+            <summary>
+              <span data-i18n="cg.static.basic">基础</span
+              ><small data-i18n="cg.static.basicHelp">影调、色彩与精确调整</small>
+            </summary>
+            <div class="adjustment-group-content">
+              <div class="section-title">
+                <h2 data-i18n="cg.static.quickLook">快速风格</h2>
+                <small data-i18n="cg.static.quickLookHelp"
+                  >曝光、对比度、饱和度、鲜艳度、高光、阴影与黑点</small
+                >
+              </div>
+              <div
+                class="quadrant-palette tone-palette wide"
+                id="tonePalette"
+                data-palette="tone"
+                role="slider"
+                data-i18n-attr="aria-label:cg.static.quickLook"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                data-i18n-attr="aria-valuetext:cg.static.toneBalance"
+                aria-describedby="toneValue"
+                tabindex="0"
+              >
+                <span class="quad q-tl" data-i18n="cg.static.brightMuted">明亮 · 淡雅</span
+                ><span class="quad q-tr" data-i18n="cg.static.brightRich">明亮 · 浓郁</span
+                ><span class="quad q-bl" data-i18n="cg.static.darkMuted">暗调 · 淡雅</span
+                ><span class="quad q-br" data-i18n="cg.static.darkRich">暗调 · 浓郁</span
+                ><i class="palette-dot quadrant-dot tone-dot" id="toneDot" aria-hidden="true"></i>
+              </div>
+              <div class="palette-value wide" id="toneValue" data-i18n="cg.static.toneBalance">
+                标准影调与色彩 · 曝光 0 · 对比度 0 · 饱和度 0
+              </div>
+              <div class="divider"></div>
+              <div class="section-title">
+                <h2 data-i18n="cg.static.colorPalette">色彩氛围盘</h2>
+                <small data-i18n="cg.static.colorPaletteHelp">冷暖 × 色调</small>
+              </div>
+              <div
+                class="quadrant-palette color-palette wide"
+                id="colorPalette"
+                data-palette="color"
+                role="slider"
+                data-i18n-attr="aria-label:cg.static.colorPalette"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                data-i18n-attr="aria-valuetext:cg.static.colorBalance"
+                aria-describedby="colorValue"
+                tabindex="0"
+              >
+                <span class="quad q-tl" data-i18n="cg.static.coolGreen">冷调 · 偏绿</span
+                ><span class="quad q-tr" data-i18n="cg.static.warmGreen">暖调 · 偏绿</span
+                ><span class="quad q-bl" data-i18n="cg.static.coolMagenta">冷调 · 洋红</span
+                ><span class="quad q-br" data-i18n="cg.static.warmMagenta">暖调 · 洋红</span
+                ><i class="palette-dot quadrant-dot color-dot" id="colorDot" aria-hidden="true"></i>
+              </div>
+              <div class="palette-value wide" id="colorValue" data-i18n="cg.static.colorBalance">
+                色彩氛围平衡 · 色温 0 · 色调 0
+              </div>
+              <div class="divider"></div>
+              <div class="section-title">
+                <h2 data-i18n="cg.static.basicAdjustments">基础调色</h2>
+                <small data-i18n="cg.static.livePreview">实时预览</small>
+              </div>
+              <div id="basicControls"></div>
+            </div>
+          </details>
+          <details class="adjustment-group color-grading-group" open>
+            <summary class="adjustment-group-heading">
+              <span class="section-heading-copy"
+                ><span data-i18n="cg.static.grading">色彩分级</span
+                ><small data-i18n="cg.static.gradingHelp">HSL 参数、强度与平衡</small></span
+              ><button
+                class="icon-button section-reset"
+                type="button"
+                data-grade-reset="all"
+                data-i18n-attr="aria-label:cg.action.resetGrading;title:cg.action.resetGrading"
+              >
+                ↺
+              </button>
+            </summary>
+            <div class="adjustment-group-content grade-editor grading-workspace">
+              <div
+                class="grade-tone-tabs"
+                role="tablist"
+                data-i18n-attr="aria-label:cg.static.chooseTone"
+              >
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneShadow"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="gradeTonePanelShadow"
+                  tabindex="0"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="shadow"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.shadows">阴影</span>
+                </button>
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneMid"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="gradeTonePanelMid"
+                  tabindex="-1"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="mid"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.midtones">中间调</span>
+                </button>
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneHigh"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="gradeTonePanelHigh"
+                  tabindex="-1"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="high"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.highlights">高光</span>
+                </button>
+              </div>
+              {{GRADE_TONES}}
+              </section>
+              <div class="grade-balance">
+                <div class="grade-balance-heading">
+                  <label for="gradeBalance" data-i18n="cg.field.globalBalance">全局平衡</label
+                  ><output id="gradeBalanceV" for="gradeBalance">0</output
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="balance"
+                    data-i18n-attr="aria-label:cg.static.resetBalance;title:cg.static.resetBalance"
+                  >
+                    ↺
+                  </button>
+                </div>
+                <input
+                  id="gradeBalance"
+                  type="range"
+                  min="-100"
+                  max="100"
+                  value="0"
+                  aria-valuenow="0"
+                  data-i18n-attr="aria-label:cg.field.globalBalance"
+                />
+                <div class="grade-balance-scale" aria-hidden="true">
+                  <span data-i18n="cg.static.shadows">阴影</span
+                  ><span data-i18n="cg.static.neutral">中性</span
+                  ><span data-i18n="cg.static.highlights">高光</span>
+                </div>
+              </div>
+            </div>
+          </details>
+          <details class="adjustment-group" open>
+            <summary>
+              <span data-i18n="cg.static.detail">细节与氛围</span
+              ><small data-i18n="cg.static.detailHelp">鲜艳度、色温、色调与清晰度</small>
+            </summary>
+            <div class="adjustment-group-content">
+              <div id="atmosphereControls"></div>
+            </div>
+          </details>
+          <div class="inspector-actions wide">
+            <div class="divider"></div>
+            <div class="button-row">
+              <button class="primary" id="apply" disabled data-i18n="cg.static.saveAdjustments">
+                应用方案</button
+              ><button class="subtle" id="reset" disabled data-i18n="cg.static.resetAdjustments">
+                重置调色
+              </button>
+            </div>
+          </div>
+          <div
+            class="editor-lock"
+            id="editorLock"
+            data-i18n-attr="aria-label:cg.static.importRequired"
+          ></div>
+        </aside>
+      </main>

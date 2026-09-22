@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-09-11",
+  "projectScope": "个人学习与本地研究，不用于商业发布或对外分发",
+  "rightsReviewIsP0Gate": false,
+  "sourceTraceabilityRequired": true,
+  "brands": [
+    {
+      "id": "hasselblad",
+      "name": "哈苏 / Hasselblad",
+      "referenceSystems": [
+        {
+          "name": "Hasselblad Natural Colour Solution (HNCS)",
+          "author": "Hasselblad",
+          "sourceUrl": "https://www.hasselblad.com/phocus/phocus-for-pc-mac/",
+          "deliveryForm": "机身与 Phocus 色彩处理体系",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "只作为视觉目标与术语来源；P1 若制作相似观感，生成本项目自己的 SDR sRGB LUT。"
+        },
+        {
+          "name": "HNCS HDR",
+          "author": "Hasselblad",
+          "sourceUrl": "https://www.hasselblad.com/x-system/x2d-ii-100c/",
+          "deliveryForm": "相机 HDR 色彩与显示工作流",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "HDR 处理不进入 P1；保留为以后高动态范围专项参考。"
+        }
+      ],
+      "learningStyleDirections": ["自然肤色", "产品颜色忠实", "柔和高光与平顺渐变"],
+      "remoteReferenceSamples": [
+        {
+          "name": "B0000994 JPEG/RAW pair",
+          "author": "Haitong Yu",
+          "cameraAndLens": "X1D-50C + XCD 4/21",
+          "indexUrl": "https://www.hasselblad.com/learn/sample-images/x-system/",
+          "jpegUrl": "https://cdn.hasselblad.com/samples/B0000994.jpg",
+          "jpegBytes": 41658006,
+          "rawUrl": "https://cdn.hasselblad.com/samples/B0000994.3FR",
+          "rawBytes": 110379008,
+          "localCopy": false,
+          "decision": "记录为后续视觉/RAW 对照下载源；不常驻项目，避免增加约 145 MiB。"
+        }
+      ]
+    },
+    {
+      "id": "nikon",
+      "name": "尼康 / Nikon",
+      "referenceSystems": [
+        {
+          "name": "Nikon Imaging Recipes / 尼康云创",
+          "author": "Nikon 或 Nikon 标注的配方创作者",
+          "sourceUrl": "https://imagingcloud.nikon.com/recipe/introduction",
+          "deliveryForm": "通过 Nikon Imaging Cloud 下发的 Custom Picture Control",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "不按 CUBE 解析；待用户提供从兼容流程导出的真实样本后，另开 NCP/NP2/NP3 适配。"
+        },
+        {
+          "name": "Flexible Color / Rich Tone Portrait",
+          "author": "Nikon",
+          "sourceUrl": "https://www.nikon.com/company/news/2024/0617_imaging_01/",
+          "deliveryForm": "NX Studio 与兼容机型的 Picture Control 能力",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "作为品牌内容候选，不声称能由当前五参数或普通 3D LUT 完整还原。"
+        },
+        {
+          "name": "RWG/Log3G10 to Rec.2020/N-Log LUT 1.00",
+          "author": "Nikon",
+          "sourceUrl": "https://downloadcenter.nikonimglib.com/en/download/sw/274.html",
+          "deliveryForm": "33 点与 65 点 3D CUBE，随 Nikon 下载包提供",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "syntax-candidate-color-space-incompatible",
+          "decision": "可作格式与性能研究候选，但不得作为普通 sRGB 照片创意滤镜的参考输出。"
+        }
+      ],
+      "nativeFileTypes": [".NCP", ".NP2", ".NP3"],
+      "verifiedCreatorBatches": [
+        {
+          "date": "2026-06-23",
+          "creators": ["Amy Shore", "MASAYA"]
+        },
+        {
+          "date": "2026-02-25",
+          "creators": ["Nagisa Ichikawa", "jyota tomonori", "HYEYA", "Kyungjun Lee"]
+        },
+        {
+          "date": "2025-12-10",
+          "creators": ["Nikon | RED", "Ludwig Favre", "Siinapse", "Instant Film Studio"]
+        }
+      ],
+      "creatorBatchSourceUrl": "https://api.user.cwp.imagingcloud.nikon.com/news?lang_code=zhCn&category_code=1"
+    },
+    {
+      "id": "leica",
+      "name": "徕卡 / Leica",
+      "referenceSystems": [
+        {
+          "name": "Leica Essential Looks",
+          "author": "Leica Camera AG",
+          "sourceUrl": "https://leica-camera.com/en-int/photography/leica-looks",
+          "deliveryForm": "通过 Leica FOTOS 进入兼容相机或在 App 中应用",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "选择官方描述明确的观感作为学习方向；P1 生成本项目自己的 SDR sRGB LUT。",
+          "namedReferences": [
+            "Silver",
+            "Classic (CLS)",
+            "Chrome (CHR)",
+            "Contemporary (CNT)",
+            "Teal (TEL)",
+            "Brass (BRS)",
+            "Bleach (BLE)",
+            "Sepia (SEP)",
+            "Blue (BLU)",
+            "Selenium (SEL)",
+            "Eternal (ETN)"
+          ]
+        },
+        {
+          "name": "Leica Artist Look by Greg Williams (WLM)",
+          "author": "Greg Williams 与 Leica Camera AG",
+          "sourceUrl": "https://leica-camera.com/en-int/photography/leica-looks",
+          "deliveryForm": "Leica Artist Look，经 Leica 生态分发",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "保留作者与风格参考，不把官网描述误记为已取得 LUT 文件。"
+        },
+        {
+          "name": "Leica Core Looks",
+          "author": "Leica Camera AG",
+          "sourceUrl": "https://leica-camera.com/en-int/photography/leica-looks",
+          "deliveryForm": "兼容相机内置 Film Look",
+          "acquiredExecutableSample": false,
+          "p1CubeCompatibility": "none",
+          "decision": "Standard、Natural、Vivid、Monochrom Natural、Monochrom High Contrast 可作为基础观感对照。"
+        }
+      ]
+    }
+  ],
+  "nonBrandSamples": [
+    {
+      "name": "P0 project-generated CUBE fixtures",
+      "author": "Real Landscape P0 fixture generator",
+      "source": "scripts/generate-p0-lut-samples.cjs",
+      "purpose": "恒等、创意、DOMAIN 边界、损坏与不支持输入"
+    },
+    {
+      "name": "OpenColorIO CUBE test files",
+      "author": "OpenColorIO contributors",
+      "sourceUrl": "https://github.com/AcademySoftwareFoundation/OpenColorIO/tree/main/tests/data/files",
+      "includedFiles": ["iridas_3d.cube", "iridas_1d.cube", "resolve_1d3d.cube"],
+      "purpose": "真实 CUBE 方言及首期不支持类型验证",
+      "notice": "tests/fixtures/luts/external-source/NOTICE.txt"
+    }
+  ]
+}

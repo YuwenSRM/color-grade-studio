@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-09-12T07:19:18.987Z",
+  "scope": "P2 no-photo browser acceptance; does not replace authorized 12MP/24MP photo performance testing.",
+  "origin": "http://127.0.0.1:57144",
+  "results": [
+    {
+      "name": "chrome",
+      "version": "152.0.7977.83",
+      "noPhotoCanvasCount": 0,
+      "hald": {
+        "bytes": 1049481,
+        "dimensions": [
+          512,
+          512
+        ],
+        "level": 8,
+        "sourceLutSha256": "4eca2581a1d6179f109979e1044bf0118917ff8785588e80fecbeae7cbbcfe57"
+      },
+      "threeDlStatus": "已识别 1 个 .3dl 方言；P2 暂不导入或应用"
+    },
+    {
+      "name": "edge",
+      "version": "153.0.4234.32",
+      "noPhotoCanvasCount": 0,
+      "hald": {
+        "bytes": 1049481,
+        "dimensions": [
+          512,
+          512
+        ],
+        "level": 8,
+        "sourceLutSha256": "4eca2581a1d6179f109979e1044bf0118917ff8785588e80fecbeae7cbbcfe57"
+      },
+      "threeDlStatus": "已识别 1 个 .3dl 方言；P2 暂不导入或应用"
+    }
+  ]
+}

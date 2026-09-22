@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/locales/en.js"></script>
+    <script src="assets/shared/i18n.js"></script>
+    <script src="assets/shared/theme-controller.js"></script>
+    <link rel="stylesheet" href="assets/shared/i18n.css" />
+    <link rel="stylesheet" href="assets/shared/select-ui.css" />
+    <script src="assets/shared/custom-select.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数据后台</title>
+    <script src="assets/shared/api-client.js"></script>
+    <script src="assets/shared/ui-utils.js"></script>
+    <link rel="stylesheet" href="assets/shared/admin.css" />
+    <link rel="stylesheet" href="assets/shared/theme.css" />
+  </head>
+  <body>
+    <div class="theme-float" aria-label="主题切换">
+      <button id="dayTheme" class="active" type="button" title="日间模式" aria-label="日间模式">
+        <span class="sun-icon"></span>
+      </button>
+      <button id="nightTheme" type="button" title="夜间模式" aria-label="夜间模式">
+        <span class="moon-icon"></span>
+      </button>
+    </div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand"><i>⌁</i>真实景观数据集 · 后台</div>
+        <nav class="nav">
+          <a href="real-landscape.html">图库</a>
+          <a href="audit.html">审核</a>
+          <a class="active" href="admin.html">后台</a>
+          <button id="logout">退出</button>
+        </nav>
+      </header>
+
+      <h1>数据概览</h1>
+      <p class="lead">所有指标均基于 SQLite 已入库记录与手动导入目录实时计算。</p>
+
+      <section class="metrics">
+        <article class="metric">
+          <span>图片总量</span><strong id="total">—</strong><small id="storage">—</small>
+        </article>
+        <article class="metric">
+          <span>待审核</span><strong id="pending">—</strong><small>需管理员处理</small>
+        </article>
+        <article class="metric">
+          <span>审核通过</span><strong id="approved">—</strong><small id="rejected">—</small>
+        </article>
+        <article class="metric">
+          <span>平均质量分</span><strong id="quality">—</strong><small id="reviewed">—</small>
+        </article>
+      </section>
+
+      <section class="grid">
+        <section class="panel">
+          <div class="panel-head"><h2>分类分布</h2></div>
+          <div class="bar-list" id="categories"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h2>数据来源</h2></div>
+          <div class="bar-list" id="sources"></div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>审核状态</h2>
+          <a class="action" href="audit.html">进入审核队列</a>
+        </div>
+        <div class="bar-list" id="statuses"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>管理账号</h2>
+            <p class="lead" style="margin: 4px 0 0">
+              游客仅浏览，普通用户可上传，管理员拥有全部权限。
+            </p>
+          </div>
+          <button class="primary" id="newUser">新增账号</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>账号</th>
+                <th>角色</th>
+                <th>创建时间</th>
+                <th>最近更新</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="userRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="dialog" id="userDialog" aria-hidden="true">
+      <section
+        class="dialog-card"
+        aria-modal="true"
+        aria-labelledby="userDialogTitle"
+        role="dialog"
+      >
+        <h2 id="userDialogTitle">新增账号</h2>
+        <div class="review-fields">
+          <label>
+            账号
+            <input id="userName" autocomplete="username" placeholder="3-40 位字母、数字或 . _ -" />
+          </label>
+          <label>
+            角色
+            <select id="userRole">
+              <option value="guest">游客（仅浏览）</option>
+              <option value="user" selected>普通用户（浏览、上传）</option>
+              <option value="admin">管理员（全部权限）</option>
+            </select>
+          </label>
+          <label>
+            密码
+            <input
+              id="userPassword"
+              type="password"
+              minlength="8"
+              autocomplete="new-password"
+              placeholder="至少 8 位；编辑时留空不修改"
+            />
+          </label>
+          <p class="notice" id="userHint">密码将使用 scrypt 加盐哈希后保存，无法在后台查看原文。</p>
+        </div>
+        <div class="dialog-actions">
+          <button class="secondary" id="userCancel">取消</button>
+          <button class="primary" id="userSave">保存账号</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="dialog confirm-dialog" id="deleteDialog" aria-hidden="true">
+      <section
+        class="dialog-card"
+        aria-modal="true"
+        aria-labelledby="deleteDialogTitle"
+        role="dialog"
+      >
+        <h2 id="deleteDialogTitle">删除账号</h2>
+        <p class="review-copy">此操作不可撤销。请输入账号名以确认删除。</p>
+        <label class="confirm-label"
+          >账号名 <input id="deleteConfirmName" autocomplete="off"
+        /></label>
+        <div class="dialog-actions">
+          <button class="secondary" id="deleteCancel">取消</button>
+          <button class="primary danger" id="deleteConfirm" disabled>删除账号</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/pages/admin.js"></script>
+    <script src="assets/shared/data-sync.js"></script>
+  </body>
+</html>

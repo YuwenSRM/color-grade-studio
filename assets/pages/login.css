@@ -1,0 +1,157 @@
+:root {
+  --ink: #142038;
+  --muted: #65738a;
+  --line: #d8e2f0;
+  --blue: #1a73e8;
+  --purple: #794ff4;
+  --soft: #edf4ff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #f6f8fc;
+  color: var(--ink);
+  font:
+    14px/1.45 Inter,
+    'Microsoft YaHei',
+    system-ui,
+    sans-serif;
+}
+.card {
+  width: min(410px, 100%);
+  padding: 29px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 45px #1a73e81a;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--blue);
+  font-weight: 750;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 16px;
+}
+h1 {
+  margin: 20px 0 4px;
+  font-size: 23px;
+}
+.intro {
+  margin: 0;
+  color: var(--muted);
+}
+.form {
+  display: grid;
+  gap: 13px;
+  margin-top: 23px;
+}
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 650;
+}
+input {
+  min-height: 41px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font: inherit;
+}
+input:focus {
+  outline: 0;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px #1a73e820;
+}
+button {
+  min-height: 41px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--blue);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--purple);
+}
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 19px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.divider:before,
+.divider:after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+.guest {
+  width: 100%;
+  background: var(--soft);
+  color: var(--blue);
+}
+.guest:hover {
+  background: #e4dbff;
+  color: #5533bd;
+}
+.hint {
+  margin: 13px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.back {
+  display: block;
+  margin-top: 17px;
+  text-align: center;
+  color: var(--blue);
+  text-decoration: none;
+}
+.toast {
+  position: fixed;
+  z-index: 2;
+  top: 24px;
+  left: 50%;
+  max-width: calc(100vw - 32px);
+  padding: 10px 14px;
+  border-radius: 5px;
+  background: #bf3d52;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  transform: translate(-50%, -10px);
+  pointer-events: none;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

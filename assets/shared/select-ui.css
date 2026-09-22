@@ -1,0 +1,106 @@
+.native-select-hidden {
+  display: none !important;
+}
+.select-ui {
+  position: relative;
+  min-width: 136px;
+}
+.select-trigger {
+  width: 100%;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 11px;
+  border: 1px solid var(--line, #cbd9f2);
+  border-radius: 5px;
+  background: var(--surface, #fff);
+  color: var(--ink, #142038);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 2px #1a73e80a;
+}
+.select-trigger:hover,
+.select-ui.open .select-trigger {
+  border-color: var(--forest, var(--blue, #1a73e8));
+  box-shadow: 0 0 0 3px #1a73e81c;
+}
+.select-trigger:focus-visible {
+  outline: 0;
+  border-color: var(--accent, var(--purple, #794ff4));
+  box-shadow: 0 0 0 3px #794ff426;
+}
+.select-trigger-value {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.select-trigger-arrow {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-right: 2px solid var(--forest, var(--blue, #1a73e8));
+  border-bottom: 2px solid var(--forest, var(--blue, #1a73e8));
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.16s ease;
+}
+.select-ui.open .select-trigger-arrow {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+.select-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 7px);
+  left: 0;
+  width: 100%;
+  display: none;
+  max-height: 250px;
+  overflow: auto;
+  padding: 6px;
+  border: 1px solid var(--line, #d8e2f0);
+  border-radius: 6px;
+  background: var(--surface, #fff);
+  box-shadow: 0 14px 30px #10203d20;
+}
+.select-ui.open .select-menu {
+  display: block;
+  animation: select-menu-in 0.15s ease both;
+}
+.select-option {
+  width: 100%;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink, #142038);
+  text-align: left;
+  cursor: pointer;
+}
+.select-option:hover,
+.select-option:focus-visible {
+  outline: 0;
+  background: var(--soft, #edf4ff);
+  color: var(--forest, var(--blue, #1a73e8));
+}
+.select-option[aria-selected='true'] {
+  background: #e8f0ff;
+  color: var(--forest, var(--blue, #1a73e8));
+  font-weight: 700;
+}
+.select-group-label {
+  padding: 8px;
+  color: var(--muted, #65738a);
+  font-size: 11px;
+  font-weight: 700;
+}
+@keyframes select-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

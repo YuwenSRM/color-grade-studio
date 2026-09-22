@@ -1,0 +1,73 @@
+  <body>
+    <div class="theme-float" data-i18n-attr="aria-label:cg.static.theme">
+      <button
+        id="dayTheme"
+        class="active"
+        type="button"
+        data-i18n-attr="title:cg.static.light;aria-label:cg.static.light"
+      >
+        <span class="sun-icon"></span>
+      </button>
+      <button
+        id="nightTheme"
+        type="button"
+        data-i18n-attr="title:cg.static.dark;aria-label:cg.static.dark"
+      >
+        <span class="moon-icon"></span>
+      </button>
+      <button
+        id="scrollTop"
+        class="scroll-top"
+        type="button"
+        data-i18n-attr="title:cg.static.top;aria-label:cg.static.top"
+      >
+        <span class="top-icon"></span>
+      </button>
+    </div>
+    <div class="page">
+      <header>
+        <div class="brand">
+          <span class="mark" translate="no">L</span
+          ><span data-i18n="cg.static.brand">景观数据集</span>
+        </div>
+        <div class="crumb">
+          <a href="real-landscape.html" data-i18n="cg.static.imageClassification">图片分类</a> /
+          <span data-i18n="cg.static.appName">调色工作台</span>
+        </div>
+      </header>
+      <section class="intro">
+        <h1 data-i18n="cg.static.heading">基于地区光色特征的调色</h1>
+        <p data-i18n="cg.static.intro">
+          原图仅在本地浏览器中处理。系统生成多个独立调色版本，不会修改或上传你的原始照片。
+        </p>
+      </section>
+      <div class="color-account" id="colorAccount" aria-live="polite">
+        <span id="colorAccountText" data-i18n="cg.static.signedOut">未登录</span>
+        <a id="colorLogin" href="login.html" data-i18n="cg.static.signInUpload">登录后上传成片</a>
+      </div>
+      <main class="workbench" data-mobile-pane="library">
+        <nav class="workbench-tabs" role="tablist" data-i18n-attr="aria-label:cg.static.workspace">
+          <button
+            id="showPresetPanel"
+            class="active"
+            type="button"
+            role="tab"
+            aria-controls="lutLibrary"
+            aria-selected="true"
+            tabindex="0"
+            data-i18n="cg.static.library"
+          >
+            LUT 库
+          </button>
+          <button
+            id="showAdjustmentsPanel"
+            type="button"
+            role="tab"
+            aria-controls="adjustmentsPanel"
+            aria-selected="false"
+            tabindex="-1"
+            data-i18n="cg.static.adjust"
+          >
+            调整
+          </button>
+        </nav>

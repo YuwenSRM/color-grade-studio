@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/locales/color-grade-zh-CN.js"></script>
+    <script src="assets/locales/color-grade-en-US.js"></script>
+    <script src="assets/locales/color-grade-look-aliases.js"></script>
+    <script src="assets/color-grade/color-grade-intent.js"></script>
+    <script src="assets/color-grade/color-grade-mode-full.js"></script>
+    <script src="assets/color-grade/color-grade-i18n.js"></script>
+    <link rel="stylesheet" href="assets/shared/i18n.css" />
+    <link rel="stylesheet" href="assets/shared/select-ui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>景观数据集 - 调色工作台</title>
+    <script src="assets/shared/theme-controller.js"></script>
+    <script src="assets/shared/api-client.js"></script>
+    <script src="assets/shared/ui-utils.js"></script>
+    <script src="assets/shared/custom-select.js" defer></script>
+    <link rel="stylesheet" href="assets/shared/theme.css" />
+    <link rel="stylesheet" href="assets/color-grade/workbench/styles/base.css" />
+    <link rel="stylesheet" href="assets/color-grade/workbench/styles/controls.css" />
+    <link rel="stylesheet" href="assets/color-grade/workbench/styles/library-dialogs.css" />
+    <link rel="stylesheet" href="assets/color-grade/workbench/styles/responsive.css" />
+  </head>
+  <body>
+    <div class="theme-float" data-i18n-attr="aria-label:cg.static.theme">
+      <button
+        id="dayTheme"
+        class="active"
+        type="button"
+        data-i18n-attr="title:cg.static.light;aria-label:cg.static.light"
+      >
+        <span class="sun-icon"></span>
+      </button>
+      <button
+        id="nightTheme"
+        type="button"
+        data-i18n-attr="title:cg.static.dark;aria-label:cg.static.dark"
+      >
+        <span class="moon-icon"></span>
+      </button>
+      <button
+        id="scrollTop"
+        class="scroll-top"
+        type="button"
+        data-i18n-attr="title:cg.static.top;aria-label:cg.static.top"
+      >
+        <span class="top-icon"></span>
+      </button>
+    </div>
+    <div class="page">
+      <header>
+        <div class="brand">
+          <span class="mark" translate="no">L</span
+          ><span data-i18n="cg.static.brand">景观数据集</span>
+        </div>
+        <div class="crumb">
+          <a href="real-landscape.html" data-i18n="cg.static.imageClassification">图片分类</a> /
+          <span data-i18n="cg.static.appName">调色工作台</span>
+        </div>
+      </header>
+      <section class="intro">
+        <h1 data-i18n="cg.static.heading">基于地区光色特征的调色</h1>
+        <p data-i18n="cg.static.intro">
+          原图仅在本地浏览器中处理。系统生成多个独立调色版本，不会修改或上传你的原始照片。
+        </p>
+      </section>
+      <div class="color-account" id="colorAccount" aria-live="polite">
+        <span id="colorAccountText" data-i18n="cg.static.signedOut">未登录</span>
+        <a id="colorLogin" href="login.html" data-i18n="cg.static.signInUpload">登录后上传成片</a>
+      </div>
+      <main class="workbench" data-mobile-pane="library">
+        <nav class="workbench-tabs" role="tablist" data-i18n-attr="aria-label:cg.static.workspace">
+          <button
+            id="showPresetPanel"
+            class="active"
+            type="button"
+            role="tab"
+            aria-controls="lutLibrary"
+            aria-selected="true"
+            tabindex="0"
+            data-i18n="cg.static.library"
+          >
+            LUT 库
+          </button>
+          <button
+            id="showAdjustmentsPanel"
+            type="button"
+            role="tab"
+            aria-controls="adjustmentsPanel"
+            aria-selected="false"
+            tabindex="-1"
+            data-i18n="cg.static.adjust"
+          >
+            调整
+          </button>
+        </nav>
+        <section class="canvas-panel">
+          <div class="canvas-head">
+            <strong id="previewName" data-i18n="cg.static.preview">预览</strong>
+            <div class="preview-frame">
+              <label for="previewAspect" data-i18n="cg.static.frame">查看画框</label
+              ><select id="previewAspect">
+                <option value="auto" data-i18n="cg.static.fit">自适应</option>
+                <option value="3:2">3:2</option>
+                <option value="4:3">4:3</option>
+                <option value="1:1">1:1</option>
+                <option value="16:9">16:9</option>
+                <option value="9:16">9:16</option></select
+              ><span id="previewMeta" data-i18n="cg.static.addImage">请先添加一张图片</span>
+            </div>
+          </div>
+          <div class="photo-bar" id="photoBar">
+            <div class="file-meta"><b id="fileName"></b><span id="fileInfo"></span></div>
+            <label class="change-file"
+              ><span data-i18n="cg.static.replaceImage">更换图片</span
+              ><input id="fileInput" type="file" accept="image/*"
+            /></label>
+          </div>
+          <div
+            class="canvas-tools"
+            id="canvasTools"
+            data-i18n-attr="aria-label:cg.static.framingTools"
+          >
+            <div class="canvas-tool-row canvas-tool-row-primary">
+              <button
+                id="zoomOut"
+                type="button"
+                data-i18n-attr="title:cg.static.zoomOut;aria-label:cg.static.zoomOut"
+              >
+                -
+              </button>
+              <span class="zoom-value" id="zoomValue">100%</span>
+              <button
+                id="zoomIn"
+                type="button"
+                data-i18n-attr="title:cg.static.zoomIn;aria-label:cg.static.zoomIn"
+              >
+                +
+              </button>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <button
+                id="undoCrop"
+                type="button"
+                data-i18n="cg.static.undo"
+                data-i18n-attr="title:cg.static.undoCrop"
+                disabled
+              >
+                撤销
+              </button>
+              <button
+                id="cropReset"
+                type="button"
+                data-i18n="cg.static.reset"
+                data-i18n-attr="title:cg.static.resetFrame"
+              >
+                复位
+              </button>
+              <button
+                id="applyCrop"
+                class="tool-primary"
+                type="button"
+                data-i18n="cg.static.applyCrop"
+                data-i18n-attr="title:cg.static.applyCrop"
+              >
+                应用裁切
+              </button>
+            </div>
+            <div class="canvas-tool-row canvas-tool-row-secondary">
+              <div
+                class="compare-controls"
+                role="group"
+                data-i18n-attr="aria-label:cg.static.comparison"
+              >
+                <button
+                  class="active"
+                  id="compareEffect"
+                  type="button"
+                  data-i18n="cg.static.effect"
+                  data-i18n-attr="title:cg.static.effect"
+                  aria-pressed="true"
+                >
+                  效果
+                </button>
+                <button
+                  id="compareOriginal"
+                  type="button"
+                  data-i18n="cg.static.original"
+                  data-i18n-attr="title:cg.static.original"
+                  aria-pressed="false"
+                >
+                  原图
+                </button>
+                <button
+                  id="compareSplitVertical"
+                  type="button"
+                  data-i18n="cg.static.splitVertical"
+                  data-i18n-attr="title:cg.static.splitVertical"
+                  aria-pressed="false"
+                >
+                  左右
+                </button>
+                <button
+                  id="compareSplitHorizontal"
+                  type="button"
+                  data-i18n="cg.static.splitHorizontal"
+                  data-i18n-attr="title:cg.static.splitHorizontal"
+                  aria-pressed="false"
+                >
+                  上下
+                </button>
+              </div>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <span class="tool-label" data-i18n="cg.static.cropAspect">画幅裁切</span>
+              <select id="cropAspect" data-i18n-attr="aria-label:cg.static.cropAspect">
+                <option value="native" data-i18n="cg.static.originalAspect">原始画幅</option>
+                <option value="3:2" data-i18n="cg.static.crop32">3:2 相机常用</option>
+                <option value="4:3" data-i18n="cg.static.crop43">4:3 标准照片</option>
+                <option value="1:1" data-i18n="cg.static.crop11">1:1 方形</option>
+                <option value="16:9" data-i18n="cg.static.crop169">16:9 横向宽屏</option>
+                <option value="2.35:1" data-i18n="cg.static.crop235">2.35:1 电影宽画幅</option>
+                <option value="9:16" data-i18n="cg.static.crop916">9:16 竖向全屏</option>
+                <option value="custom" data-i18n="cg.static.customCrop">自定义裁切</option>
+              </select>
+              <span class="crop-hint" id="cropHint" data-i18n="cg.static.cropHint"
+                >放大后可裁切画面</span
+              >
+            </div>
+          </div>
+          <div id="importStatus" class="import-status" role="status" aria-live="polite" hidden>
+            <span id="importMessage" data-i18n="cg.static.importing">正在读取图片…</span>
+            <button
+              id="cancelImport"
+              class="subtle"
+              type="button"
+              data-i18n="cg.static.cancelImport"
+            >
+              取消导入
+            </button>
+          </div>
+          <div class="stage empty" id="stage" tabindex="0">
+            <canvas id="mainCanvas"></canvas>
+            <canvas id="interactiveCanvas" aria-hidden="true"></canvas>
+            <canvas id="comparisonCanvas" aria-hidden="true"></canvas>
+            <div
+              id="comparisonDivider"
+              class="comparison-divider"
+              role="slider"
+              data-i18n-attr="aria-label:cg.static.comparison"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-orientation="vertical"
+              tabindex="0"
+              hidden
+            ></div>
+            <div class="crop-box" id="cropBox" aria-hidden="true">
+              <i class="crop-handle nw" data-handle="nw"></i
+              ><i class="crop-handle ne" data-handle="ne"></i
+              ><i class="crop-handle sw" data-handle="sw"></i
+              ><i class="crop-handle se" data-handle="se"></i>
+            </div>
+            <span class="crop-live-hint" id="cropLiveHint" data-i18n="cg.static.cropHint"
+              >放大后可裁切画面</span
+            >
+            <div class="empty-state" id="empty">
+              <div class="drop-icon">+</div>
+              <b data-i18n="cg.static.dropImage">拖入一张风景照片</b
+              ><span data-i18n="cg.static.chooseOrPaste">或点击选择图片，也可以直接粘贴截图。</span
+              ><label class="file-button"
+                ><span data-i18n="cg.static.chooseImage">选择图片</span
+                ><input id="emptyFileInput" type="file" accept="image/*"
+              /></label>
+            </div>
+          </div>
+          <div class="filter-intensity" id="filterIntensity" hidden>
+            <div class="filter-intensity-head">
+              <label for="filterIntensityInput" data-i18n="cg.static.filterStrength"
+                >滤镜强度</label
+              >
+              <output id="filterIntensityValue" for="filterIntensityInput">100%</output>
+            </div>
+            <div class="filter-intensity-control">
+              <span class="filter-intensity-endpoint" data-i18n="cg.static.originalZero"
+                >原图 0%</span
+              >
+              <input
+                id="filterIntensityInput"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="100"
+                aria-valuetext="100%"
+              />
+              <span class="filter-intensity-endpoint" data-i18n="cg.static.completeFilter"
+                >完整滤镜 100%</span
+              >
+            </div>
+            <p
+              class="filter-intensity-status"
+              id="filterIntensityStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <p class="filter-intensity-reason" id="filterIntensityReason" hidden></p>
+          </div>
+          <div class="actions">
+            <div class="publish-fields" id="publishFields">
+              <label for="publishTitle" data-i18n="cg.static.imageTitle">图片标题</label>
+              <input
+                id="publishTitle"
+                maxlength="200"
+                data-i18n-attr="placeholder:cg.static.enterTitle"
+                disabled
+              />
+              <label for="publishDescription" data-i18n="cg.static.imageDescription"
+                >图片正文</label
+              >
+              <textarea
+                id="publishDescription"
+                maxlength="5000"
+                rows="3"
+                data-i18n-attr="placeholder:cg.static.enterDescription"
+                disabled
+              ></textarea>
+            </div>
+            <label class="download-select" for="downloadSpec">
+              <span data-i18n="cg.static.downloadSpec">下载规格</span>
+              <select id="downloadSpec" disabled>
+                <option value="original" data-i18n="cg.static.gradedOriginal">
+                  原图（已调色）
+                </option>
+                <option value="high" selected data-i18n="cg.static.high">高清</option>
+                <option value="standard" data-i18n="cg.static.standard">标准</option>
+                <option value="web" data-i18n="cg.static.web">网页</option>
+                <option value="preview" data-i18n="cg.static.previewSize">预览</option>
+              </select>
+            </label>
+            <button class="download" id="download" disabled data-i18n="cg.static.download">
+              下载图像</button
+            ><button
+              class="subtle"
+              id="cancelExport"
+              type="button"
+              disabled
+              hidden
+              data-i18n="cg.static.cancelExport"
+            >
+              取消导出</button
+            ><button
+              class="subtle"
+              id="exportHald"
+              type="button"
+              data-i18n="cg.static.exportHald"
+              data-i18n-attr="title:cg.static.exportHaldTitle"
+              disabled
+            >
+              导出 Hald CLUT</button
+            ><button
+              class="subtle"
+              id="cancelHald"
+              type="button"
+              disabled
+              hidden
+              data-i18n="cg.static.cancelHald"
+            >
+              取消 Hald</button
+            ><button class="primary" id="uploadToLibrary" disabled data-i18n="cg.static.upload">
+              上传入库</button
+            ><span class="status" id="status" role="status" aria-live="polite"></span
+            ><span
+              class="status"
+              id="haldInfo"
+              role="status"
+              aria-live="polite"
+              data-i18n="cg.static.haldInfo"
+              >Hald CLUT：选择已验证的 3D LUT 后可导出</span
+            >
+          </div>
+        </section>
+        <aside
+          class="controls"
+          id="adjustmentsPanel"
+          role="tabpanel"
+          aria-labelledby="showAdjustmentsPanel"
+          data-i18n-attr="aria-label:cg.static.photoAdjustments"
+        >
+          <details class="adjustment-group" open>
+            <summary>
+              <span data-i18n="cg.static.basic">基础</span
+              ><small data-i18n="cg.static.basicHelp">影调、色彩与精确调整</small>
+            </summary>
+            <div class="adjustment-group-content">
+              <div class="section-title">
+                <h2 data-i18n="cg.static.quickLook">快速风格</h2>
+                <small data-i18n="cg.static.quickLookHelp"
+                  >曝光、对比度、饱和度、鲜艳度、高光、阴影与黑点</small
+                >
+              </div>
+              <div
+                class="quadrant-palette tone-palette wide"
+                id="tonePalette"
+                data-palette="tone"
+                role="slider"
+                data-i18n-attr="aria-label:cg.static.quickLook"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                data-i18n-attr="aria-valuetext:cg.static.toneBalance"
+                aria-describedby="toneValue"
+                tabindex="0"
+              >
+                <span class="quad q-tl" data-i18n="cg.static.brightMuted">明亮 · 淡雅</span
+                ><span class="quad q-tr" data-i18n="cg.static.brightRich">明亮 · 浓郁</span
+                ><span class="quad q-bl" data-i18n="cg.static.darkMuted">暗调 · 淡雅</span
+                ><span class="quad q-br" data-i18n="cg.static.darkRich">暗调 · 浓郁</span
+                ><i class="palette-dot quadrant-dot tone-dot" id="toneDot" aria-hidden="true"></i>
+              </div>
+              <div class="palette-value wide" id="toneValue" data-i18n="cg.static.toneBalance">
+                标准影调与色彩 · 曝光 0 · 对比度 0 · 饱和度 0
+              </div>
+              <div class="divider"></div>
+              <div class="section-title">
+                <h2 data-i18n="cg.static.colorPalette">色彩氛围盘</h2>
+                <small data-i18n="cg.static.colorPaletteHelp">冷暖 × 色调</small>
+              </div>
+              <div
+                class="quadrant-palette color-palette wide"
+                id="colorPalette"
+                data-palette="color"
+                role="slider"
+                data-i18n-attr="aria-label:cg.static.colorPalette"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                data-i18n-attr="aria-valuetext:cg.static.colorBalance"
+                aria-describedby="colorValue"
+                tabindex="0"
+              >
+                <span class="quad q-tl" data-i18n="cg.static.coolGreen">冷调 · 偏绿</span
+                ><span class="quad q-tr" data-i18n="cg.static.warmGreen">暖调 · 偏绿</span
+                ><span class="quad q-bl" data-i18n="cg.static.coolMagenta">冷调 · 洋红</span
+                ><span class="quad q-br" data-i18n="cg.static.warmMagenta">暖调 · 洋红</span
+                ><i class="palette-dot quadrant-dot color-dot" id="colorDot" aria-hidden="true"></i>
+              </div>
+              <div class="palette-value wide" id="colorValue" data-i18n="cg.static.colorBalance">
+                色彩氛围平衡 · 色温 0 · 色调 0
+              </div>
+              <div class="divider"></div>
+              <div class="section-title">
+                <h2 data-i18n="cg.static.basicAdjustments">基础调色</h2>
+                <small data-i18n="cg.static.livePreview">实时预览</small>
+              </div>
+              <div id="basicControls"></div>
+            </div>
+          </details>
+          <details class="adjustment-group color-grading-group" open>
+            <summary class="adjustment-group-heading">
+              <span class="section-heading-copy"
+                ><span data-i18n="cg.static.grading">色彩分级</span
+                ><small data-i18n="cg.static.gradingHelp">HSL 参数、强度与平衡</small></span
+              ><button
+                class="icon-button section-reset"
+                type="button"
+                data-grade-reset="all"
+                data-i18n-attr="aria-label:cg.action.resetGrading;title:cg.action.resetGrading"
+              >
+                ↺
+              </button>
+            </summary>
+            <div class="adjustment-group-content grade-editor grading-workspace">
+              <div
+                class="grade-tone-tabs"
+                role="tablist"
+                data-i18n-attr="aria-label:cg.static.chooseTone"
+              >
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneShadow"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="gradeTonePanelShadow"
+                  tabindex="0"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="shadow"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.shadows">阴影</span>
+                </button>
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneMid"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="gradeTonePanelMid"
+                  tabindex="-1"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="mid"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.midtones">中间调</span>
+                </button>
+                <button
+                  class="grade-tone-tab"
+                  id="gradeToneHigh"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="gradeTonePanelHigh"
+                  tabindex="-1"
+                >
+                  <span
+                    class="grade-tone-tab-swatch"
+                    data-grade-swatch="high"
+                    aria-hidden="true"
+                  ></span
+                  ><span data-i18n="cg.static.highlights">高光</span>
+                </button>
+              </div>
+                            <section
+                class="grade-tone-panel"
+                id="gradeTonePanelShadow"
+                role="tabpanel"
+                aria-labelledby="gradeToneShadow"
+              >
+                <div class="grade-current-color-row">
+                  <button
+                    class="grade-current-color"
+                    type="button"
+                    data-grade-color-picker="shadow"
+                    aria-controls="shadowColor"
+                  >
+                    <span
+                      class="grade-current-color-swatch"
+                      data-grade-swatch="shadow"
+                      aria-hidden="true"
+                    ></span
+                    ><span data-i18n="cg.static.currentColor">当前颜色</span>
+                  </button>
+                  <input
+                    class="wheel"
+                    id="shadowColor"
+                    type="color"
+                    value="#2e6aa1"
+                    data-i18n-attr="aria-label:cg.static.shadowColor"
+                    tabindex="-1"
+                  />
+                </div>
+                <div class="grade-value-fields" data-i18n-attr="aria-label:cg.static.hsl">
+                  <label class="grade-value-field" for="shadowHue"
+                    ><span data-i18n="cg.static.hue">色相</span
+                    ><input
+                      id="shadowHue"
+                      type="number"
+                      min="0"
+                      max="360"
+                      step="1"
+                      value="210"
+                      data-i18n-attr="aria-label:cg.static.hueDegrees"
+                    /><small data-i18n="cg.static.degree">°</small></label
+                  >
+                  <label class="grade-value-field" for="shadowSat"
+                    ><span data-i18n="cg.static.saturation">饱和度</span
+                    ><input
+                      id="shadowSat"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value="55"
+                      data-i18n-attr="aria-label:cg.static.saturationPercent"
+                    /><small>%</small></label
+                  >
+                  <label class="grade-value-field" for="shadowLight"
+                    ><span data-i18n="cg.static.lightness">明度</span
+                    ><input
+                      id="shadowLight"
+                      type="number"
+                      min="-100"
+                      max="100"
+                      step="1"
+                      value="0"
+                      data-i18n-attr="aria-label:cg.static.lightnessRange"
+                    /><small data-i18n="cg.static.range">-100 至 +100</small></label
+                  >
+                </div>
+                <div class="grade-intensity-row">
+                  <label for="shadowAmt" data-i18n="cg.static.colorIntensity">色彩强度</label
+                  ><input
+                    id="shadowAmt"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensity"
+                  /><input
+                    id="shadowAmtInput"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensityPercent"
+                  /><span aria-hidden="true">%</span
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="shadow"
+                    data-i18n-attr="aria-label:cg.static.resetTone;title:cg.static.resetTone"
+                  >
+                    ↺
+                  </button>
+                </div>
+              </section>
+              <section
+                class="grade-tone-panel"
+                id="gradeTonePanelMid"
+                role="tabpanel"
+                aria-labelledby="gradeToneMid"
+                hidden
+              >
+                <div class="grade-current-color-row">
+                  <button
+                    class="grade-current-color"
+                    type="button"
+                    data-grade-color-picker="mid"
+                    aria-controls="midColor"
+                  >
+                    <span
+                      class="grade-current-color-swatch"
+                      data-grade-swatch="mid"
+                      aria-hidden="true"
+                    ></span
+                    ><span data-i18n="cg.static.currentColor">当前颜色</span>
+                  </button>
+                  <input
+                    class="wheel"
+                    id="midColor"
+                    type="color"
+                    value="#6ca56e"
+                    data-i18n-attr="aria-label:cg.static.midColor"
+                    tabindex="-1"
+                  />
+                </div>
+                <div class="grade-value-fields" data-i18n-attr="aria-label:cg.static.hsl">
+                  <label class="grade-value-field" for="midHue"
+                    ><span data-i18n="cg.static.hue">色相</span
+                    ><input
+                      id="midHue"
+                      type="number"
+                      min="0"
+                      max="360"
+                      step="1"
+                      value="122"
+                      data-i18n-attr="aria-label:cg.static.hueDegrees"
+                    /><small data-i18n="cg.static.degree">°</small></label
+                  >
+                  <label class="grade-value-field" for="midSat"
+                    ><span data-i18n="cg.static.saturation">饱和度</span
+                    ><input
+                      id="midSat"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value="24"
+                      data-i18n-attr="aria-label:cg.static.saturationPercent"
+                    /><small>%</small></label
+                  >
+                  <label class="grade-value-field" for="midLight"
+                    ><span data-i18n="cg.static.lightness">明度</span
+                    ><input
+                      id="midLight"
+                      type="number"
+                      min="-100"
+                      max="100"
+                      step="1"
+                      value="0"
+                      data-i18n-attr="aria-label:cg.static.lightnessRange"
+                    /><small data-i18n="cg.static.range">-100 至 +100</small></label
+                  >
+                </div>
+                <div class="grade-intensity-row">
+                  <label for="midAmt" data-i18n="cg.static.colorIntensity">色彩强度</label
+                  ><input
+                    id="midAmt"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensity"
+                  /><input
+                    id="midAmtInput"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensityPercent"
+                  /><span aria-hidden="true">%</span
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="mid"
+                    data-i18n-attr="aria-label:cg.static.resetTone;title:cg.static.resetTone"
+                  >
+                    ↺
+                  </button>
+                </div>
+              </section>
+              <section
+                class="grade-tone-panel"
+                id="gradeTonePanelHigh"
+                role="tabpanel"
+                aria-labelledby="gradeToneHigh"
+                hidden
+              >
+                <div class="grade-current-color-row">
+                  <button
+                    class="grade-current-color"
+                    type="button"
+                    data-grade-color-picker="high"
+                    aria-controls="highColor"
+                  >
+                    <span
+                      class="grade-current-color-swatch"
+                      data-grade-swatch="high"
+                      aria-hidden="true"
+                    ></span
+                    ><span data-i18n="cg.static.currentColor">当前颜色</span>
+                  </button>
+                  <input
+                    class="wheel"
+                    id="highColor"
+                    type="color"
+                    value="#e3a149"
+                    data-i18n-attr="aria-label:cg.static.highColor"
+                    tabindex="-1"
+                  />
+                </div>
+                <div class="grade-value-fields" data-i18n-attr="aria-label:cg.static.hsl">
+                  <label class="grade-value-field" for="highHue"
+                    ><span data-i18n="cg.static.hue">色相</span
+                    ><input
+                      id="highHue"
+                      type="number"
+                      min="0"
+                      max="360"
+                      step="1"
+                      value="35"
+                      data-i18n-attr="aria-label:cg.static.hueDegrees"
+                    /><small data-i18n="cg.static.degree">°</small></label
+                  >
+                  <label class="grade-value-field" for="highSat"
+                    ><span data-i18n="cg.static.saturation">饱和度</span
+                    ><input
+                      id="highSat"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value="73"
+                      data-i18n-attr="aria-label:cg.static.saturationPercent"
+                    /><small>%</small></label
+                  >
+                  <label class="grade-value-field" for="highLight"
+                    ><span data-i18n="cg.static.lightness">明度</span
+                    ><input
+                      id="highLight"
+                      type="number"
+                      min="-100"
+                      max="100"
+                      step="1"
+                      value="0"
+                      data-i18n-attr="aria-label:cg.static.lightnessRange"
+                    /><small data-i18n="cg.static.range">-100 至 +100</small></label
+                  >
+                </div>
+                <div class="grade-intensity-row">
+                  <label for="highAmt" data-i18n="cg.static.colorIntensity">色彩强度</label
+                  ><input
+                    id="highAmt"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensity"
+                  /><input
+                    id="highAmtInput"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensityPercent"
+                  /><span aria-hidden="true">%</span
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="high"
+                    data-i18n-attr="aria-label:cg.static.resetTone;title:cg.static.resetTone"
+                  >
+                    ↺
+                  </button>
+                </div>
+              </section>
+              </section>
+              <div class="grade-balance">
+                <div class="grade-balance-heading">
+                  <label for="gradeBalance" data-i18n="cg.field.globalBalance">全局平衡</label
+                  ><output id="gradeBalanceV" for="gradeBalance">0</output
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="balance"
+                    data-i18n-attr="aria-label:cg.static.resetBalance;title:cg.static.resetBalance"
+                  >
+                    ↺
+                  </button>
+                </div>
+                <input
+                  id="gradeBalance"
+                  type="range"
+                  min="-100"
+                  max="100"
+                  value="0"
+                  aria-valuenow="0"
+                  data-i18n-attr="aria-label:cg.field.globalBalance"
+                />
+                <div class="grade-balance-scale" aria-hidden="true">
+                  <span data-i18n="cg.static.shadows">阴影</span
+                  ><span data-i18n="cg.static.neutral">中性</span
+                  ><span data-i18n="cg.static.highlights">高光</span>
+                </div>
+              </div>
+            </div>
+          </details>
+          <details class="adjustment-group" open>
+            <summary>
+              <span data-i18n="cg.static.detail">细节与氛围</span
+              ><small data-i18n="cg.static.detailHelp">鲜艳度、色温、色调与清晰度</small>
+            </summary>
+            <div class="adjustment-group-content">
+              <div id="atmosphereControls"></div>
+            </div>
+          </details>
+          <div class="inspector-actions wide">
+            <div class="divider"></div>
+            <div class="button-row">
+              <button class="primary" id="apply" disabled data-i18n="cg.static.saveAdjustments">
+                应用方案</button
+              ><button class="subtle" id="reset" disabled data-i18n="cg.static.resetAdjustments">
+                重置调色
+              </button>
+            </div>
+          </div>
+          <div
+            class="editor-lock"
+            id="editorLock"
+            data-i18n-attr="aria-label:cg.static.importRequired"
+          ></div>
+        </aside>
+      </main>
+      <section
+        class="lut-library-section"
+        id="lutLibrary"
+        role="tabpanel"
+        aria-labelledby="showPresetPanel"
+      >
+        <div class="preset-panel" id="presetPanel" data-i18n-attr="aria-label:cg.static.library">
+          <div class="variants-title">
+            <h2 id="lutLibraryTitle" tabindex="-1" data-i18n="cg.static.myLut">我的 LUT</h2>
+            <div class="library-menu-wrap">
+              <button
+                class="icon-button library-menu-toggle"
+                id="libraryMenuToggle"
+                type="button"
+                data-i18n-attr="aria-label:cg.static.openLutMenu;title:cg.static.manageLut"
+                aria-controls="libraryMenu"
+                aria-expanded="false"
+              >
+                ⋯
+              </button>
+              <div
+                class="library-menu"
+                id="libraryMenu"
+                role="group"
+                data-i18n-attr="aria-label:cg.static.manageLut"
+                hidden
+              >
+                <button
+                  class="subtle"
+                  id="importFilters"
+                  type="button"
+                  data-i18n="cg.static.importFilters"
+                >
+                  导入滤镜
+                </button>
+                <button
+                  class="subtle"
+                  id="backupFilters"
+                  type="button"
+                  data-i18n="cg.static.backupFilters"
+                >
+                  备份我的滤镜
+                </button>
+                <label class="restore-mode" for="restoreMode"
+                  ><span data-i18n="cg.static.restoreMode">恢复方式</span>
+                  <select id="restoreMode">
+                    <option value="merge" data-i18n="cg.static.merge">合并</option>
+                    <option value="replace" data-i18n="cg.static.replace">替换</option>
+                  </select>
+                </label>
+                <button
+                  class="subtle"
+                  id="restoreFilters"
+                  type="button"
+                  data-i18n="cg.static.restoreBackup"
+                >
+                  恢复备份
+                </button>
+              </div>
+            </div>
+            <span id="variantHint" data-i18n="cg.static.uploadToShow">上传图片后显示方案</span>
+          </div>
+          <div class="lut-filter-sentinel" aria-hidden="true"></div>
+          <div class="lut-filter-sticky">
+            <div
+              class="filter-bar"
+              id="filterBar"
+              data-i18n-attr="aria-label:cg.static.presetFilters"
+            >
+              <input
+                id="filterSearch"
+                type="search"
+                data-i18n-attr="aria-label:cg.static.intentLabel;placeholder:cg.static.intentPlaceholder"
+              />
+              <select id="filterSource" data-i18n-attr="aria-label:cg.static.filterSource">
+                <option value="all" data-i18n="cg.static.allSources">全部来源</option>
+                <option value="builtin" data-i18n="cg.static.builtInFilters">内置滤镜</option>
+                <option value="user" data-i18n="cg.static.myFilters">我的滤镜</option>
+              </select>
+              <select id="filterScene" data-i18n-attr="aria-label:cg.static.scene">
+                <option value="all" data-i18n="cg.static.allScenes">全部场景</option>
+              </select>
+              <label class="favorite-filter"
+                ><input id="filterFavorites" type="checkbox" />
+                <span data-i18n="cg.static.favorites">仅收藏</span></label
+              >
+              <details class="more-filters" id="moreFilters">
+                <summary data-i18n="cg.static.moreFilters">更多筛选</summary>
+                <div class="more-filter-fields">
+                  <label for="filterRegion" data-i18n="cg.static.region">地区</label
+                  ><select id="filterRegion" data-i18n-attr="aria-label:cg.static.region">
+                    <option value="all" data-i18n="cg.static.allRegions">全部地区</option></select
+                  ><label for="filterCamera" data-i18n="cg.static.camera">相机</label
+                  ><select id="filterCamera" data-i18n-attr="aria-label:cg.static.camera">
+                    <option value="all" data-i18n="cg.static.allCameras">全部相机</option>
+                  </select>
+                </div>
+              </details>
+              <button
+                class="subtle"
+                id="clearFilters"
+                type="button"
+                data-i18n="cg.static.clearFilters"
+              >
+                清除筛选
+              </button>
+            </div>
+          </div>
+          <div class="intent-result" id="intentResult" aria-live="polite" hidden>
+            <div class="intent-chips" id="intentChips"></div>
+            <p id="intentSuggestion"></p>
+            <div class="intent-actions">
+              <button
+                id="previewIntent"
+                class="primary"
+                type="button"
+                disabled
+                data-i18n="cg.static.previewIntent"
+              >
+                预览
+              </button>
+              <button
+                id="clearIntent"
+                class="subtle"
+                type="button"
+                disabled
+                data-i18n="cg.static.clearIntent"
+              >
+                清除
+              </button>
+            </div>
+          </div>
+          <div class="library-actions" aria-label="我的滤镜管理">
+            <span
+              id="libraryStatus"
+              class="library-status"
+              role="status"
+              aria-live="polite"
+              data-i18n="cg.static.filtersLocal"
+              >我的滤镜保存在当前浏览器</span
+            >
+            <input
+              id="filterImportInput"
+              type="file"
+              accept=".cube,.json,.3dl,application/json,text/plain"
+              multiple
+              hidden
+            />
+            <input id="filterRestoreInput" type="file" accept=".zip,application/zip" hidden />
+          </div>
+          <div class="filter-empty" id="filterEmpty" hidden data-i18n="cg.static.noPresets">
+            没有匹配的预设
+          </div>
+          <section class="variants" id="variants"></section>
+          <nav
+            class="filter-pagination"
+            id="filterPagination"
+            data-i18n-attr="aria-label:cg.static.pagination"
+            hidden
+          >
+            <button
+              id="previousVariantPage"
+              class="subtle"
+              type="button"
+              data-i18n-attr="aria-label:cg.static.previous"
+            >
+              上一页</button
+            ><span id="variantPageStatus" aria-live="polite"></span
+            ><button
+              id="nextVariantPage"
+              class="subtle"
+              type="button"
+              data-i18n-attr="aria-label:cg.static.next"
+            >
+              下一页
+            </button>
+          </nav>
+        </div>
+      </section>
+    </div>
+    <div
+      class="editor-toast"
+      id="editorToast"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      aria-hidden="true"
+    >
+      <span data-i18n="cg.static.importRequired">请先导入图片后再使用调色功能</span>
+    </div>
+    <div class="upload-modal" id="uploadModal" hidden>
+      <div class="upload-modal-backdrop" data-upload-close></div>
+      <section
+        class="upload-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="uploadDialogTitle"
+      >
+        <div class="upload-dialog-head">
+          <h2 id="uploadDialogTitle" data-i18n="cg.static.uploadLibrary">上传到图片库</h2>
+          <button
+            class="upload-dialog-close"
+            type="button"
+            data-upload-close
+            data-i18n-attr="aria-label:cg.static.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="upload-form">
+          <label for="uploadTitle" data-i18n="cg.static.imageTitle">图片标题</label>
+          <input
+            id="uploadTitle"
+            maxlength="200"
+            data-i18n-attr="placeholder:cg.static.enterTitle"
+          />
+          <label for="uploadDescription" data-i18n="cg.static.imageDescription">图片正文</label>
+          <textarea
+            id="uploadDescription"
+            maxlength="5000"
+            rows="4"
+            data-i18n-attr="placeholder:cg.static.enterDescription"
+          ></textarea>
+        </div>
+        <div class="upload-dialog-actions">
+          <button class="subtle" id="cancelUpload" type="button" data-i18n="cg.static.cancel">
+            取消
+          </button>
+          <button
+            class="primary"
+            id="confirmUpload"
+            type="button"
+            data-i18n="cg.static.confirmUpload"
+          >
+            确认上传
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="filter-modal" id="filterModal" hidden>
+      <div class="filter-modal-backdrop" data-filter-modal-close></div>
+      <section
+        class="filter-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filterDialogTitle"
+      >
+        <div class="upload-dialog-head">
+          <h2 id="filterDialogTitle" data-i18n="cg.static.editFilter">编辑我的滤镜</h2>
+          <button
+            class="upload-dialog-close"
+            type="button"
+            data-filter-modal-close
+            data-i18n-attr="aria-label:cg.static.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="upload-form">
+          <label for="filterEditName" data-i18n="cg.static.name">名称</label
+          ><input id="filterEditName" maxlength="120" />
+          <label for="filterEditBrand" data-i18n="cg.static.brand">品牌</label
+          ><input id="filterEditBrand" maxlength="80" />
+          <label for="filterEditAuthor" data-i18n="cg.static.author">作者</label
+          ><input id="filterEditAuthor" maxlength="120" />
+          <label for="filterEditSource" data-i18n="cg.static.sourceUrl">来源网址</label
+          ><input
+            id="filterEditSource"
+            type="url"
+            maxlength="500"
+            data-i18n-attr="placeholder:cg.static.optionalUrl"
+          />
+          <label for="filterEditScenes" data-i18n="cg.static.scenes">场景（以逗号分隔）</label
+          ><input id="filterEditScenes" maxlength="500" />
+          <label for="filterEditInputSpace" data-i18n="cg.static.inputSpace">输入色彩空间</label>
+          <select id="filterEditInputSpace">
+            <option value="sRGB SDR">sRGB SDR</option>
+            <option value="未知" data-i18n="cg.static.unknown">未知</option>
+          </select>
+          <label for="filterEditOutputSpace" data-i18n="cg.static.outputSpace">输出色彩空间</label>
+          <select id="filterEditOutputSpace">
+            <option value="sRGB SDR">sRGB SDR</option>
+            <option value="未知" data-i18n="cg.static.unknown">未知</option>
+          </select>
+          <label for="filterEditLicense" data-i18n="cg.static.license">许可说明</label
+          ><textarea id="filterEditLicense" maxlength="500" rows="2"></textarea>
+        </div>
+        <div
+          class="filter-delete-confirmation"
+          id="filterDeleteConfirmation"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          <p id="filterDeleteMessage"></p>
+          <button
+            class="subtle"
+            id="cancelFilterDelete"
+            type="button"
+            data-i18n="cg.static.cancelDelete"
+          >
+            取消删除
+          </button>
+        </div>
+        <div class="upload-dialog-actions">
+          <button class="subtle" id="deleteFilter" type="button" data-i18n="cg.static.delete">
+            删除
+          </button>
+          <span class="dialog-spacer"></span>
+          <button class="subtle" id="cancelFilterEdit" type="button" data-i18n="cg.static.cancel">
+            取消
+          </button>
+          <button class="primary" id="saveFilterEdit" type="button" data-i18n="cg.static.save">
+            保存
+          </button>
+        </div>
+      </section>
+    </div>
+    <script src="assets/color-grade/color-grade-renderer.js"></script>
+    <script src="assets/color-grade/color-grade-webgl-preview.js"></script>
+    <script src="assets/color-grade/color-grade-lut.js"></script>
+    <script src="assets/color-grade/color-grade-lut-renderer.js"></script>
+    <script src="assets/color-grade/color-grade-lut-library.js"></script>
+    <script src="assets/color-grade/color-grade-hald.js"></script>
+    <script src="assets/color-grade/color-grade-3dl.js"></script>
+    <script src="assets/color-grade/p2-builtin-filters.js"></script>
+    <script src="assets/color-grade/color-grade-builtin-catalog.js"></script>
+    <script src="assets/color-grade/color-grade-p1-client.js"></script>
+    <script src="assets/pages/color-grade-import.js"></script>
+    <script src="assets/color-grade/workbench/catalog.js"></script>
+    <script src="assets/color-grade/workbench/state.js"></script>
+    <script src="assets/color-grade/workbench/preview-renderer.js"></script>
+    <script src="assets/color-grade/workbench/filter-library.js"></script>
+    <script src="assets/color-grade/workbench/interactions-crop-export.js"></script>
+    <script src="assets/pages/color-grade.js"></script>
+    <script src="assets/pages/color-grade-full-integration.js"></script>
+    <script src="assets/shared/data-sync.js"></script>
+  </body>
+</html>

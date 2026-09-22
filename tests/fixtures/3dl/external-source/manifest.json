@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "purpose": "P2 read-only .3dl dialect detection fixtures. They are not importable or distributable built-in LUT content.",
+  "upstreamProject": "AcademySoftwareFoundation/OpenColorIO",
+  "upstreamLicense": "BSD-3-Clause",
+  "licensePath": "tests/fixtures/3dl/external-source/LICENSE.txt",
+  "upstreamCommit": "5a808fb57a94c7229640a97835c420c9a1fbd1fe",
+  "sourceBaseUrl": "https://github.com/AcademySoftwareFoundation/OpenColorIO/tree/5a808fb57a94c7229640a97835c420c9a1fbd1fe/tests/data/files",
+  "entries": [
+    {
+      "id": "ocio-discreet-3dmesh-17",
+      "path": "tests/fixtures/3dl/external-source/discreet-3d-lut.3dl",
+      "sourceUrl": "https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/5a808fb57a94c7229640a97835c420c9a1fbd1fe/tests/data/files/discreet-3d-lut.3dl",
+      "license": "BSD-3-Clause",
+      "blobSha": "44929d7cbd353c7dc0df4ba22840a6c6785ae781",
+      "sha256": "a2da0a7da5b54f0fc2453e69ad4732fc20802f902e6a29802230a5d74870dce1",
+      "bytes": 63058,
+      "expectedDialect": "discreet-3dmesh",
+      "expectedGridSize": 17,
+      "expectedOutputRange": [0, 4095],
+      "expectedDataRows": 4912,
+      "status": "detected-unsupported"
+    },
+    {
+      "id": "ocio-lustre-3dmesh-33",
+      "path": "tests/fixtures/3dl/external-source/lustre_33x33x33.3dl",
+      "sourceUrl": "https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/5a808fb57a94c7229640a97835c420c9a1fbd1fe/tests/data/files/lustre_33x33x33.3dl",
+      "license": "BSD-3-Clause",
+      "blobSha": "92bf9d779ea9f731cb70ee857fe3dd8a1a9c1d46",
+      "sha256": "3920d37e4509fbfac2e47abe6ba4382eb649a882f9f87b9046b31ec2a57653be",
+      "bytes": 718860,
+      "expectedDialect": "lustre-3dmesh",
+      "expectedGridSize": 33,
+      "expectedOutputRange": [0, 4095],
+      "expectedDataRows": 35937,
+      "status": "detected-unsupported"
+    }
+  ]
+}

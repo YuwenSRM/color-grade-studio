@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/locales/en.js"></script>
+    <script src="assets/shared/i18n.js"></script>
+    <script src="assets/shared/theme-controller.js"></script>
+    <link rel="stylesheet" href="assets/shared/i18n.css" />
+    <link rel="stylesheet" href="assets/shared/select-ui.css" />
+    <script src="assets/shared/custom-select.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>图片审核</title>
+    <script src="assets/shared/api-client.js"></script>
+    <script src="assets/shared/ui-utils.js"></script>
+    <link rel="stylesheet" href="assets/shared/admin.css" />
+    <link rel="stylesheet" href="assets/shared/theme.css" />
+  </head>
+  <body>
+    <div class="theme-float" aria-label="主题切换">
+      <button id="dayTheme" class="active" type="button" title="日间模式" aria-label="日间模式">
+        <span class="sun-icon"></span>
+      </button>
+      <button id="nightTheme" type="button" title="夜间模式" aria-label="夜间模式">
+        <span class="moon-icon"></span>
+      </button>
+    </div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand"><i>⌁</i>景观数据集 · 审核</div>
+        <nav class="nav">
+          <a href="real-landscape.html">图库</a>
+          <a class="active" href="audit.html">审核</a>
+          <a href="admin.html">后台</a>
+          <button id="logout">退出</button>
+        </nav>
+      </header>
+
+      <h1>审核队列</h1>
+      <p class="lead">审核结果会写入本地 SQLite 数据库，并立即影响图库与后台统计。</p>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2 id="title">待加载</h2>
+          <div class="filters">
+            <select id="status" aria-label="审核状态筛选">
+              <option value="pending">待审核</option>
+              <option value="all">全部状态</option>
+              <option value="approved">已通过</option>
+              <option value="rejected">已驳回</option>
+            </select>
+            <input id="query" placeholder="搜索文件名、分类或来源" />
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>图片</th>
+                <th>文件与分类</th>
+                <th>来源</th>
+                <th>状态</th>
+                <th>质量</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="dialog" id="dialog" aria-hidden="true">
+      <section class="dialog-card" aria-modal="true" aria-labelledby="dialogTitle" role="dialog">
+        <h2 id="dialogTitle" translate="no">审核图片</h2>
+        <p id="dialogDescription" class="review-copy" translate="no"></p>
+        <img class="review-image" id="dialogImage" alt="待审核图片预览" />
+        <div class="review-fields">
+          <label>
+            审核结果
+            <select id="reviewStatus">
+              <option value="approved">通过</option>
+              <option value="rejected">驳回</option>
+              <option value="pending">退回待审核</option>
+            </select>
+          </label>
+          <label>
+            质量分（0-100）
+            <input id="qualityScore" type="number" min="0" max="100" step="1" />
+          </label>
+          <label>审核备注<textarea id="reviewNote" maxlength="500"></textarea></label>
+        </div>
+        <div class="dialog-actions">
+          <button class="secondary" id="cancel">取消</button>
+          <button class="primary" id="save">保存审核结果</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/pages/audit.js"></script>
+    <script src="assets/shared/data-sync.js"></script>
+  </body>
+</html>

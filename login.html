@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/locales/en.js"></script>
+    <script src="assets/shared/i18n.js"></script>
+    <script src="assets/shared/theme-controller.js"></script>
+    <link rel="stylesheet" href="assets/shared/i18n.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>登录 - 真实景观数据集</title>
+    <script src="assets/shared/api-client.js"></script>
+    <link rel="stylesheet" href="assets/pages/login.css" />
+    <link rel="stylesheet" href="assets/shared/theme.css" />
+  </head>
+  <body>
+    <div class="theme-float" aria-label="主题切换">
+      <button id="dayTheme" class="active" type="button" title="日间模式" aria-label="日间模式">
+        <span class="sun-icon"></span>
+      </button>
+      <button id="nightTheme" type="button" title="夜间模式" aria-label="夜间模式">
+        <span class="moon-icon"></span>
+      </button>
+    </div>
+    <div
+      class="toast"
+      id="toast"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      aria-hidden="true"
+    ></div>
+    <main class="card">
+      <div class="brand"><span class="mark">⌁</span>真实景观数据集</div>
+      <h1>登录账号</h1>
+      <p class="intro">普通用户可浏览和上传图片；管理员可进入审核与数据后台。</p>
+      <form class="form" id="login" novalidate>
+        <label
+          >账号<input
+            id="username"
+            autocomplete="username"
+            required
+            aria-describedby="usernameError" /><span
+            class="field-error"
+            id="usernameError"
+            aria-live="polite"
+          ></span
+        ></label>
+        <label
+          >密码<input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="8"
+            required
+            aria-describedby="passwordError" /><span
+            class="field-error"
+            id="passwordError"
+            aria-live="polite"
+          ></span
+        ></label>
+        <button type="submit">登录</button>
+      </form>
+      <div class="divider">或</div>
+      <button class="guest" id="guest" type="button">游客浏览</button>
+      <p class="hint">游客仅可浏览图片库，上传和管理功能需登录账号。</p>
+      <a class="back" href="real-landscape.html">返回图片库</a>
+    </main>
+    <script src="assets/pages/login.js"></script>
+    <script src="assets/shared/data-sync.js"></script>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+/* Shared visual tokens for every frontend page. */
+:root {
+  --ink: #172033;
+  --muted: #667085;
+  --line: #d9e2f2;
+  --surface: #ffffff;
+  --paper: #ffffff;
+  --bg: #f7f9fd;
+  --control-bg: #ffffff;
+  --soft: #eef4ff;
+  --blue: #1a73e8;
+  --forest: #1a73e8;
+  --green: #1a73e8;
+  --purple: #794ff4;
+  --accent: #794ff4;
+  --good: #13795b;
+  --warn: #a86600;
+  --bad: #b93850;
+  --scrollbar-track: #edf2fb;
+  --scrollbar-thumb: #8fa8cf;
+  --scrollbar-thumb-hover: #5b82c1;
+  --scrollbar-thumb-active: #794ff4;
+  --scrollbar-corner: #edf2fb;
+}
+
+html.dark,
+body.dark {
+  --ink: #edf3ff;
+  --muted: #aab8cd;
+  --line: #33435f;
+  --surface: #17243b;
+  --paper: #17243b;
+  --bg: #0d1628;
+  --control-bg: #111d31;
+  --soft: #1d2d4d;
+  --blue: #76aaff;
+  --forest: #76aaff;
+  --green: #76aaff;
+  --purple: #ad95ff;
+  --accent: #ad95ff;
+  --good: #68d1a7;
+  --warn: #f2bd63;
+  --bad: #ff8da2;
+  --scrollbar-track: #111d31;
+  --scrollbar-thumb: #5876ab;
+  --scrollbar-thumb-hover: #7fa9ee;
+  --scrollbar-thumb-active: #ad95ff;
+  --scrollbar-corner: #111d31;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Shared scrollbars cover document, tables, menus, modal bodies, and image stages. */
+html,
+* {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  min-width: 40px;
+  min-height: 40px;
+  border: 3px solid var(--scrollbar-track);
+  border-radius: 999px;
+  background: var(--scrollbar-thumb);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-corner);
+}
+
+*::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+body.dark .card,
+body.dark .metric,
+body.dark .panel,
+body.dark aside,
+body.dark .gallery-wrap,
+body.dark .canvas-panel,
+body.dark .controls,
+body.dark .variant,
+body.dark .publish-fields,
+body.dark .dialog-card {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select,
+body.dark .select-trigger,
+body.dark .select-menu,
+body.dark .download-select,
+body.dark .secondary,
+body.dark .subtle {
+  border-color: var(--line);
+  background-color: var(--control-bg);
+  color: var(--ink);
+}
+
+body.dark .select-option:hover,
+body.dark .select-option:focus-visible,
+body.dark .select-option[aria-selected='true'],
+body.dark .action,
+body.dark .guest {
+  background: var(--soft);
+  color: var(--blue);
+}
+
+body.dark .status.pending {
+  color: #f2bd63;
+  background: #3b2d17;
+}
+
+body.dark .status.approved {
+  color: #68d1a7;
+  background: #12352e;
+}
+
+body.dark .status.rejected {
+  color: #ff8da2;
+  background: #40202c;
+}
+
+.theme-float {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  box-shadow: 0 8px 22px #1a73e822;
+  transform: translateY(-50%);
+}
+
+.theme-float button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-float button:hover,
+.theme-float button.active {
+  color: var(--blue);
+  background: var(--soft);
+}
+
+.sun-icon,
+.moon-icon {
+  display: block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+}
+
+.sun-icon {
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow:
+    0 -7px 0 -6px currentColor,
+    0 7px 0 -6px currentColor,
+    7px 0 0 -6px currentColor,
+    -7px 0 0 -6px currentColor,
+    5px 5px 0 -6px currentColor,
+    -5px -5px 0 -6px currentColor,
+    5px -5px 0 -6px currentColor,
+    -5px 5px 0 -6px currentColor;
+}
+
+.moon-icon {
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.moon-icon::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+@media (max-width: 580px) {
+  .theme-float {
+    right: 10px;
+    top: auto;
+    bottom: 16px;
+    transform: none;
+  }
+}

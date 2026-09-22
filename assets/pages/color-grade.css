@@ -1,0 +1,5 @@
+/*
+ * Compatibility entry point for tooling that references the historic path.
+ * color-grade.html loads the ordered workbench stylesheets directly so the
+ * cascade stays byte-for-byte ordered without relying on nested @import.
+ */

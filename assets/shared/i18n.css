@@ -1,0 +1,44 @@
+.language-toggle {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--line, #d8e2f0);
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  color: var(--blue, #1a73e8);
+  box-shadow: 0 8px 24px #10203d22;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+html[lang='en'] {
+  --pan-hint: 'Drag to adjust framing position';
+  --crop-hint: 'Drag to select a custom crop area';
+}
+.language-toggle:hover {
+  background: var(--soft, #edf4ff);
+  border-color: var(--purple, #794ff4);
+  transform: translateY(-1px);
+}
+.language-toggle:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px #1a73e833;
+}
+.language-toggle .lang-icon {
+  font-size: 15px;
+}
+@media (max-width: 580px) {
+  .language-toggle {
+    right: 12px;
+    bottom: 12px;
+  }
+}

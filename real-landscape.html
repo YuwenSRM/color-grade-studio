@@ -1,0 +1,178 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/locales/en.js"></script>
+    <script src="assets/shared/i18n.js"></script>
+    <link rel="stylesheet" href="assets/shared/i18n.css" />
+    <link rel="stylesheet" href="assets/shared/select-ui.css" />
+    <script src="assets/shared/custom-select.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>真实景观数据集 - 分类演示</title>
+    <script src="assets/shared/theme-controller.js"></script>
+    <script src="assets/shared/api-client.js"></script>
+    <script src="assets/shared/ui-utils.js"></script>
+    <link rel="stylesheet" href="assets/pages/real-landscape.css" />
+    <link rel="stylesheet" href="assets/shared/theme.css" />
+  </head>
+
+  <body>
+    <div class="shell">
+      <header>
+        <div class="brand"><span class="mark">⌁</span>真实景观数据集</div>
+        <div class="period">
+          <a
+            href="color-grade.html"
+            style="color: var(--forest); font-weight: 700; text-decoration: none"
+            >打开 AI 调色工作台</a
+          >&nbsp;&nbsp;·&nbsp;&nbsp;<span id="accountLinks"
+            ><a
+              href="login.html"
+              style="color: var(--forest); font-weight: 700; text-decoration: none"
+              >登录</a
+            ></span
+          >
+        </div>
+      </header>
+      <section class="hero">
+        <div>
+          <h1>真实风景图像分类</h1>
+          <p class="sub">上传照片后，系统将生成场景、光照与天气标签，并将数据放入待审核队列。</p>
+          <p class="storage-note">
+            手动导入目录：<code>image-library/imports</code>；网页上传保存至：<code
+              >image-library/originals</code
+            >
+          </p>
+        </div>
+        <label class="upload" id="uploadTrigger" for="picker"
+          >+ 添加图片<input id="picker" type="file" accept="image/*" multiple
+        /></label>
+      </section>
+      <section class="metrics">
+        <div class="metric">
+          <span>当前图片总量</span><strong id="total">—</strong
+          ><small id="storageSummary">正在读取本地数据</small>
+        </div>
+        <div class="metric">
+          <span>已覆盖分类</span><strong id="categoryCount">—</strong
+          ><small>基于实际图片分类</small>
+        </div>
+        <div class="metric">
+          <span>待人工审核</span><strong id="pending">—</strong><small>仅管理员可审核</small>
+        </div>
+        <div class="metric">
+          <span>已审核平均质量分</span><strong id="quality">—</strong
+          ><small id="approvedSummary">暂无审核数据</small>
+        </div>
+      </section>
+      <main>
+        <aside>
+          <h2 class="side-title">场景分类</h2>
+          <div id="filters"></div>
+          <div class="divider"></div>
+          <h2 class="side-title">审核状态</h2>
+          <div class="status-row">
+            <span class="legend"><i class="dot" style="background: #e0a33d"></i>待审核</span
+            ><b id="pendingSide">—</b>
+          </div>
+          <div class="status-row">
+            <span class="legend"><i class="dot" style="background: #2c9566"></i>已通过</span
+            ><b id="approvedSide">—</b>
+          </div>
+        </aside>
+        <section class="gallery-wrap">
+          <div class="gallery-head">
+            <div>
+              <h2>图片库</h2>
+              <p id="resultText">正在读取本地图片</p>
+            </div>
+            <select class="sort" id="sort" aria-label="图片排序">
+              <option>按质量分排序</option>
+              <option>按最新上传排序</option>
+            </select>
+          </div>
+          <div class="gallery" id="gallery"></div>
+        </section>
+      </main>
+    </div>
+    <div
+      class="toast"
+      id="toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-hidden="true"
+    ></div>
+    <div class="image-preview" id="imagePreview" aria-hidden="true">
+      <section
+        class="preview-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="previewTitle"
+      >
+        <header class="preview-toolbar">
+          <div class="preview-heading">
+            <strong class="preview-title" id="previewTitle" translate="no"></strong>
+          </div>
+          <div class="preview-gallery-nav" id="previewGalleryNav">
+            <button
+              class="preview-gallery-button"
+              id="previewPrevious"
+              type="button"
+              aria-label="上一张图片"
+              title="上一张图片"
+            >
+              ‹
+            </button>
+            <span class="preview-count" id="previewCount" aria-live="polite"></span>
+            <button
+              class="preview-gallery-button"
+              id="previewNext"
+              type="button"
+              aria-label="下一张图片"
+              title="下一张图片"
+            >
+              ›
+            </button>
+          </div>
+          <div class="preview-toolbar-actions">
+            <button
+              class="preview-control"
+              id="previewZoom"
+              type="button"
+              aria-label="放大图片"
+              title="放大图片"
+            >
+              +
+            </button>
+            <button
+              class="preview-control"
+              id="previewClose"
+              type="button"
+              aria-label="关闭大图预览"
+              title="关闭大图预览"
+            >
+              ×
+            </button>
+          </div>
+        </header>
+        <div class="preview-stage" id="previewStage">
+          <img class="preview-image" id="previewImage" alt="" translate="no" />
+        </div>
+        <footer class="preview-caption">
+          <span id="previewDetails"></span>
+          <p id="previewDescription" translate="no"></p>
+        </footer>
+      </section>
+    </div>
+    <div class="theme-float" aria-label="主题切换">
+      <button id="dayTheme" class="active" type="button" title="日间模式" aria-label="日间模式">
+        <span class="sun-icon"></span></button
+      ><button id="nightTheme" type="button" title="夜间模式" aria-label="夜间模式">
+        <span class="moon-icon"></span>
+      </button>
+    </div>
+    <script src="assets/pages/real-landscape.js"></script>
+    <script src="assets/shared/data-sync.js"></script>
+  </body>
+</html>

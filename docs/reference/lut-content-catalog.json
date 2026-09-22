@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "real-landscape-p2-content-admission",
+  "catalogStatus": "completed-local-research",
+  "preparedOn": "2026-09-12",
+  "projectScope": "个人学习与本地研究。自研内容可随本项目分发；本清单不构成品牌内容、原厂算法或外部产品发布所需的实拍授权证明。",
+  "admissionRules": {
+    "requiredOrigins": ["self-developed", "licensed"],
+    "allowedStatuses": ["validation-only", "admitted", "blocked"],
+    "requiredVisualChecks": [
+      "grayscale",
+      "skin-tone",
+      "sky-vegetation",
+      "saturated-color",
+      "highlight-rolloff"
+    ],
+    "releaseRequires": [
+      "admissionStatus=admitted",
+      "packagePolicy.includeInBuiltin=true",
+      "packagePolicy.includeInRelease=true",
+      "complete license or self-development evidence",
+      "sRGB SDR input and output",
+      "all visual checks approved",
+      "at least one authorized test image; external product release additionally requires authorized production photography"
+    ]
+  },
+  "referenceOnlySources": [
+    {
+      "id": "hasselblad-hncs-reference",
+      "label": "Hasselblad HNCS",
+      "sourceUrl": "https://www.hasselblad.com/phocus/phocus-for-pc-mac/",
+      "role": "visual-reference-only",
+      "acquiredExecutableSample": false,
+      "mayPackage": false,
+      "notes": "品牌体系仅用于研究和术语追踪，不证明已取得算法、LUT 或再分发权。"
+    },
+    {
+      "id": "nikon-imaging-recipes-reference",
+      "label": "Nikon Imaging Recipes",
+      "sourceUrl": "https://imagingcloud.nikon.com/recipe/introduction",
+      "role": "visual-reference-only",
+      "acquiredExecutableSample": false,
+      "mayPackage": false,
+      "notes": "配方通过 Nikon 生态下发，不作为当前 CUBE 或品牌授权内容。"
+    },
+    {
+      "id": "leica-looks-reference",
+      "label": "Leica Looks",
+      "sourceUrl": "https://leica-camera.com/en-int/photography/leica-looks",
+      "role": "visual-reference-only",
+      "acquiredExecutableSample": false,
+      "mayPackage": false,
+      "notes": "官方名称和观感描述仅作研究参考，不把相似效果标为官方或原版。"
+    }
+  ],
+  "entries": [
+    {
+      "internalId": "p2-sample-warm-portrait-17",
+      "displayName": "暖调人像（自研风格模拟·验证样本）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "validation-only",
+      "brandLabel": "自定义",
+      "styleSimulation": true,
+      "author": "Real Landscape P0 fixture generator",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p0-lut-samples.cjs",
+      "license": {
+        "status": "project-generated",
+        "name": "project-generated",
+        "version": "p0-fixture-generator-v1",
+        "originalLicensePath": "",
+        "originalFileHash": "1c69e4021bf1b9d127143f78f06655d2daf3a4abfadff85e363e8dd63362145a",
+        "allowRedistribution": false,
+        "scope": "test-only"
+      },
+      "distributionScope": "test-only",
+      "content": {
+        "path": "tests/fixtures/luts/creative/warm-portrait-17.cube",
+        "sha256": "1c69e4021bf1b9d127143f78f06655d2daf3a4abfadff85e363e8dd63362145a",
+        "bytes": 132893,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [],
+      "visualVerification": {
+        "status": "pending-authorized-test-photo",
+        "reviewer": "",
+        "reviewedOn": "",
+        "checks": {
+          "grayscale": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "skin-tone": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "sky-vegetation": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "saturated-color": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "highlight-rolloff": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": false,
+        "includeInRelease": false,
+        "reason": "仅用于解析、渲染和 Hald 原型回归；尚无授权测试照片和完成的视觉审核。"
+      }
+    },
+    {
+      "internalId": "p2-sample-cool-landscape-17",
+      "displayName": "冷调风景（自研风格模拟·验证样本）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "validation-only",
+      "brandLabel": "自定义",
+      "styleSimulation": true,
+      "author": "Real Landscape P0 fixture generator",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p0-lut-samples.cjs",
+      "license": {
+        "status": "project-generated",
+        "name": "project-generated",
+        "version": "p0-fixture-generator-v1",
+        "originalLicensePath": "",
+        "originalFileHash": "f7c1504794a01a47854b778e24619d1c83560816d8df1181beecb28273b4c8ee",
+        "allowRedistribution": false,
+        "scope": "test-only"
+      },
+      "distributionScope": "test-only",
+      "content": {
+        "path": "tests/fixtures/luts/creative/cool-landscape-17.cube",
+        "sha256": "f7c1504794a01a47854b778e24619d1c83560816d8df1181beecb28273b4c8ee",
+        "bytes": 132894,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [],
+      "visualVerification": {
+        "status": "pending-authorized-test-photo",
+        "reviewer": "",
+        "reviewedOn": "",
+        "checks": {
+          "grayscale": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "skin-tone": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "sky-vegetation": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "saturated-color": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "highlight-rolloff": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": false,
+        "includeInRelease": false,
+        "reason": "仅用于解析、渲染和 Hald 原型回归；尚无授权测试照片和完成的视觉审核。"
+      }
+    },
+    {
+      "internalId": "p2-sample-clean-contrast-17",
+      "displayName": "干净对比（自研风格模拟·验证样本）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "validation-only",
+      "brandLabel": "自定义",
+      "styleSimulation": true,
+      "author": "Real Landscape P0 fixture generator",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p0-lut-samples.cjs",
+      "license": {
+        "status": "project-generated",
+        "name": "project-generated",
+        "version": "p0-fixture-generator-v1",
+        "originalLicensePath": "",
+        "originalFileHash": "576409ea0c3d648efd0d2ae88e277930b605bb4813ba1ebbc04a53e86af9d050",
+        "allowRedistribution": false,
+        "scope": "test-only"
+      },
+      "distributionScope": "test-only",
+      "content": {
+        "path": "tests/fixtures/luts/creative/clean-contrast-17.cube",
+        "sha256": "576409ea0c3d648efd0d2ae88e277930b605bb4813ba1ebbc04a53e86af9d050",
+        "bytes": 132894,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [],
+      "visualVerification": {
+        "status": "pending-authorized-test-photo",
+        "reviewer": "",
+        "reviewedOn": "",
+        "checks": {
+          "grayscale": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "skin-tone": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "sky-vegetation": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "saturated-color": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          },
+          "highlight-rolloff": {
+            "status": "pending",
+            "input": "",
+            "preview": "",
+            "export": "",
+            "conclusion": ""
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": false,
+        "includeInRelease": false,
+        "reason": "仅用于解析、渲染和 Hald 原型回归；尚无授权测试照片和完成的视觉审核。"
+      }
+    },
+    {
+      "internalId": "p2-builtin-soft-portrait",
+      "displayName": "柔和肖像（自研风格模拟）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "admitted",
+      "brandLabel": "自研风格",
+      "styleSimulation": true,
+      "author": "Real Landscape",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p2-content.cjs",
+      "license": {
+        "status": "project-owned",
+        "name": "Real Landscape P2 Built-in Filters",
+        "version": "2026-09-12",
+        "originalLicensePath": "assets/color-grade/p2-builtin-filters/LICENSE.md",
+        "originalFileHash": "4eca2581a1d6179f109979e1044bf0118917ff8785588e80fecbeae7cbbcfe57",
+        "allowRedistribution": true,
+        "scope": "builtin-and-project-release"
+      },
+      "distributionScope": "builtin-and-project-release",
+      "content": {
+        "path": "assets/color-grade/p2-builtin-filters/soft-portrait.cube",
+        "sha256": "4eca2581a1d6179f109979e1044bf0118917ff8785588e80fecbeae7cbbcfe57",
+        "bytes": 147673,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [
+        {
+          "id": "p2-synthetic-sdr-color-review-v1",
+          "assetType": "synthetic-color-review-image",
+          "isPhotograph": false,
+          "ownership": "project-generated",
+          "authorized": true,
+          "path": "docs/reference/p2-evidence/source-color-review.png",
+          "sha256": "3f60a792d0bbea35b3b643abbc16434256d7a8e20def007b2e74f73a31629ddf",
+          "limitations": "项目生成的色彩评审图，不是实拍照片，不能替代外部产品发布所需的授权生产摄影基准。"
+        }
+      ],
+      "evidenceOutputId": "soft-portrait",
+      "visualVerification": {
+        "status": "approved",
+        "reviewer": "Real Landscape P2 local review",
+        "reviewedOn": "2026-09-12",
+        "evidenceManifestPath": "docs/reference/p2-evidence/manifest.json",
+        "evidenceManifestSha256": "8c623b1a5c5b099775952d1835935745be505be829f794207d6ca23a152294ee",
+        "checks": {
+          "grayscale": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/soft-portrait-preview.png",
+            "export": "docs/reference/p2-evidence/soft-portrait-export.png",
+            "conclusion": "灰阶保持连续，未见通道断层。"
+          },
+          "skin-tone": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/soft-portrait-preview.png",
+            "export": "docs/reference/p2-evidence/soft-portrait-export.png",
+            "conclusion": "参考肤色区保持暖色偏移受控。"
+          },
+          "sky-vegetation": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/soft-portrait-preview.png",
+            "export": "docs/reference/p2-evidence/soft-portrait-export.png",
+            "conclusion": "天空与植被过渡仍可区分。"
+          },
+          "saturated-color": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/soft-portrait-preview.png",
+            "export": "docs/reference/p2-evidence/soft-portrait-export.png",
+            "conclusion": "饱和色块无异常截断。"
+          },
+          "highlight-rolloff": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/soft-portrait-preview.png",
+            "export": "docs/reference/p2-evidence/soft-portrait-export.png",
+            "conclusion": "高光渐变连续且保留暖色层次。"
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": true,
+        "includeInRelease": true,
+        "reason": "项目自研、许可证允许分发；外部产品发布仍须另行补充授权实拍性能证据。"
+      }
+    },
+    {
+      "internalId": "p2-builtin-clear-landscape",
+      "displayName": "清澈风景（自研风格模拟）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "admitted",
+      "brandLabel": "自研风格",
+      "styleSimulation": true,
+      "author": "Real Landscape",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p2-content.cjs",
+      "license": {
+        "status": "project-owned",
+        "name": "Real Landscape P2 Built-in Filters",
+        "version": "2026-09-12",
+        "originalLicensePath": "assets/color-grade/p2-builtin-filters/LICENSE.md",
+        "originalFileHash": "7e0bb97d2f54ad261ba46716e7a2c9625c3c696a5248cd4c31184e603a08e403",
+        "allowRedistribution": true,
+        "scope": "builtin-and-project-release"
+      },
+      "distributionScope": "builtin-and-project-release",
+      "content": {
+        "path": "assets/color-grade/p2-builtin-filters/clear-landscape.cube",
+        "sha256": "7e0bb97d2f54ad261ba46716e7a2c9625c3c696a5248cd4c31184e603a08e403",
+        "bytes": 147675,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [
+        {
+          "id": "p2-synthetic-sdr-color-review-v1",
+          "assetType": "synthetic-color-review-image",
+          "isPhotograph": false,
+          "ownership": "project-generated",
+          "authorized": true,
+          "path": "docs/reference/p2-evidence/source-color-review.png",
+          "sha256": "3f60a792d0bbea35b3b643abbc16434256d7a8e20def007b2e74f73a31629ddf",
+          "limitations": "项目生成的色彩评审图，不是实拍照片，不能替代外部产品发布所需的授权生产摄影基准。"
+        }
+      ],
+      "evidenceOutputId": "clear-landscape",
+      "visualVerification": {
+        "status": "approved",
+        "reviewer": "Real Landscape P2 local review",
+        "reviewedOn": "2026-09-12",
+        "evidenceManifestPath": "docs/reference/p2-evidence/manifest.json",
+        "evidenceManifestSha256": "8c623b1a5c5b099775952d1835935745be505be829f794207d6ca23a152294ee",
+        "checks": {
+          "grayscale": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/clear-landscape-preview.png",
+            "export": "docs/reference/p2-evidence/clear-landscape-export.png",
+            "conclusion": "灰阶保持连续，未见通道断层。"
+          },
+          "skin-tone": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/clear-landscape-preview.png",
+            "export": "docs/reference/p2-evidence/clear-landscape-export.png",
+            "conclusion": "参考肤色区保持自然且没有不连续的偏色。"
+          },
+          "sky-vegetation": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/clear-landscape-preview.png",
+            "export": "docs/reference/p2-evidence/clear-landscape-export.png",
+            "conclusion": "天空与植被色带区分清晰。"
+          },
+          "saturated-color": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/clear-landscape-preview.png",
+            "export": "docs/reference/p2-evidence/clear-landscape-export.png",
+            "conclusion": "饱和色块保持边界和层次。"
+          },
+          "highlight-rolloff": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/clear-landscape-preview.png",
+            "export": "docs/reference/p2-evidence/clear-landscape-export.png",
+            "conclusion": "高光渐变连续，无突变截断。"
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": true,
+        "includeInRelease": true,
+        "reason": "项目自研、许可证允许分发；外部产品发布仍须另行补充授权实拍性能证据。"
+      }
+    },
+    {
+      "internalId": "p2-builtin-gentle-highlight",
+      "displayName": "柔光层次（自研风格模拟）",
+      "kind": "lut",
+      "category": "creative-lut",
+      "origin": "self-developed",
+      "admissionStatus": "admitted",
+      "brandLabel": "自研风格",
+      "styleSimulation": true,
+      "author": "Real Landscape",
+      "sourceUrl": "",
+      "sourceRef": "scripts/generate-p2-content.cjs",
+      "license": {
+        "status": "project-owned",
+        "name": "Real Landscape P2 Built-in Filters",
+        "version": "2026-09-12",
+        "originalLicensePath": "assets/color-grade/p2-builtin-filters/LICENSE.md",
+        "originalFileHash": "37677b1f37960f0fa1e6e48ef1ce06aa95d359b5b03eef594829c4e9e541e379",
+        "allowRedistribution": true,
+        "scope": "builtin-and-project-release"
+      },
+      "distributionScope": "builtin-and-project-release",
+      "content": {
+        "path": "assets/color-grade/p2-builtin-filters/gentle-highlight.cube",
+        "sha256": "37677b1f37960f0fa1e6e48ef1ce06aa95d359b5b03eef594829c4e9e541e379",
+        "bytes": 147676,
+        "gridSize": 17,
+        "domainMin": [0, 0, 0],
+        "domainMax": [1, 1, 1],
+        "ordering": "red-fastest",
+        "interpolation": "trilinear"
+      },
+      "color": {
+        "inputColorSpace": "sRGB SDR",
+        "outputColorSpace": "sRGB SDR",
+        "compatibilityStatus": "applicable"
+      },
+      "testPhotos": [
+        {
+          "id": "p2-synthetic-sdr-color-review-v1",
+          "assetType": "synthetic-color-review-image",
+          "isPhotograph": false,
+          "ownership": "project-generated",
+          "authorized": true,
+          "path": "docs/reference/p2-evidence/source-color-review.png",
+          "sha256": "3f60a792d0bbea35b3b643abbc16434256d7a8e20def007b2e74f73a31629ddf",
+          "limitations": "项目生成的色彩评审图，不是实拍照片，不能替代外部产品发布所需的授权生产摄影基准。"
+        }
+      ],
+      "evidenceOutputId": "gentle-highlight",
+      "visualVerification": {
+        "status": "approved",
+        "reviewer": "Real Landscape P2 local review",
+        "reviewedOn": "2026-09-12",
+        "evidenceManifestPath": "docs/reference/p2-evidence/manifest.json",
+        "evidenceManifestSha256": "8c623b1a5c5b099775952d1835935745be505be829f794207d6ca23a152294ee",
+        "checks": {
+          "grayscale": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+            "export": "docs/reference/p2-evidence/gentle-highlight-export.png",
+            "conclusion": "灰阶保持连续，未见通道断层。"
+          },
+          "skin-tone": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+            "export": "docs/reference/p2-evidence/gentle-highlight-export.png",
+            "conclusion": "参考肤色区平滑，未见明显偏色跳变。"
+          },
+          "sky-vegetation": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+            "export": "docs/reference/p2-evidence/gentle-highlight-export.png",
+            "conclusion": "天空与植被交界保持渐变层次。"
+          },
+          "saturated-color": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+            "export": "docs/reference/p2-evidence/gentle-highlight-export.png",
+            "conclusion": "饱和色块无异常削顶。"
+          },
+          "highlight-rolloff": {
+            "status": "approved",
+            "input": "docs/reference/p2-evidence/source-color-review.png",
+            "preview": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+            "export": "docs/reference/p2-evidence/gentle-highlight-export.png",
+            "conclusion": "高光渐变柔和且连续。"
+          }
+        }
+      },
+      "packagePolicy": {
+        "includeInBuiltin": true,
+        "includeInRelease": true,
+        "reason": "项目自研、许可证允许分发；外部产品发布仍须另行补充授权实拍性能证据。"
+      }
+    }
+  ]
+}

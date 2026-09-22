@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "p1Worker": {
+    "protocolVersion": 1,
+    "errorFields": ["type", "protocolVersion", "requestId", "code", "message"],
+    "readyFields": ["type", "protocolVersion", "protocol"]
+  },
+  "userLutRecordV1": {
+    "schemaVersion": 1,
+    "requiredFields": [
+      "id",
+      "schemaVersion",
+      "kind",
+      "contentHash",
+      "name",
+      "origin",
+      "brand",
+      "author",
+      "sourceUrl",
+      "licenseNote",
+      "scenes",
+      "inputColorSpace",
+      "outputColorSpace",
+      "compatibilityStatus",
+      "favorite",
+      "thumbnailKey",
+      "createdAt",
+      "updatedAt",
+      "parameters"
+    ],
+    "forbiddenLocalizedFields": ["labelKey", "descriptionKey", "aliases"]
+  }
+}

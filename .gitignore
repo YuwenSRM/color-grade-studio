@@ -1,0 +1,21 @@
+# Dependencies and generated distributions
+node_modules/
+dist/
+
+# Local runtime configuration and data
+.env
+.claude/
+data/
+uploads/
+image-library/imports/
+image-library/originals/
+
+# Local logs and test output
+*.log
+tests/artifacts/
+playwright-report/
+test-results/
+
+# Keep source-controlled fixtures and their manifests available to tests.
+!tests/fixtures/
+!tests/fixtures/**

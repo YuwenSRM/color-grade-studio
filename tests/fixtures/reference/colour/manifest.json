@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Development-only syntax and conversion reference fixture; never copied into the standalone distribution.",
+  "upstreamProject": "colour-science/colour",
+  "upstreamCommit": "5259f87c012e42b570778007f3d2560c15549518",
+  "upstreamPath": "colour/io/luts/tests/resources/resolve_cube/Three_Dimensional_Table.cube",
+  "sourceUrl": "https://github.com/colour-science/colour/blob/5259f87c012e42b570778007f3d2560c15549518/colour/io/luts/tests/resources/resolve_cube/Three_Dimensional_Table.cube",
+  "license": "BSD-3-Clause; see LICENSE.txt",
+  "entries": [
+    {
+      "path": "Three_Dimensional_Table.cube",
+      "sha256": "d59a5d9f87a2fd26496abdeeb82b61600a598c43d19ae75b8dfd4bf5f9c019b2",
+      "bytes": 70,
+      "use": "P3-1 parser and conversion-reference development only"
+    }
+  ]
+}

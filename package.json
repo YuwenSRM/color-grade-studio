@@ -1,0 +1,45 @@
+{
+  "name": "real-landscape",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node serve.js",
+    "build:html": "node scripts/build-html.cjs",
+    "check:html": "node scripts/check-generated-html.cjs",
+    "build:standalone": "npm run build:html && vite build --config vite.standalone.config.mjs",
+    "preview:standalone": "vite preview --config vite.standalone.config.mjs",
+    "check:standalone": "node scripts/check-standalone-dist.cjs",
+    "serve:standalone": "node scripts/serve-standalone.cjs",
+    "package:standalone": "npm run verify:standalone-release",
+    "package:standalone:artifact": "node scripts/package-standalone-candidate.cjs",
+    "check:standalone-candidate": "node scripts/check-standalone-candidate.cjs",
+    "test": "node --test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run check:html && node scripts/check-syntax.cjs",
+    "check:project": "node scripts/check-project.cjs",
+    "capture:color-grade-baseline": "node scripts/capture-color-grade-ui-realtime-baseline.cjs",
+    "test:p1-browser": "node scripts/acceptance-p1-browser.cjs",
+    "test:p2": "node --test tests/color-grade-hald.test.cjs tests/color-grade-3dl.test.cjs tests/p2-content-catalog.test.cjs && node scripts/validate-p2-content-catalog.cjs && node scripts/benchmark-p2-exchange.cjs",
+    "test:p2-browser": "node scripts/acceptance-p2-browser.cjs",
+    "test:p3-0": "npm run build:standalone && npm run check:standalone && node --test tests/p3-0-standalone.test.cjs && node scripts/acceptance-p3-0-standalone.cjs",
+    "test:p3-0:artifact": "node --test tests/p3-0-standalone.test.cjs",
+    "test:color-grade-i18n-source-standalone": "node --test tests/color-grade-p0-guardrails.test.cjs tests/color-grade-i18n-runtime.test.cjs tests/color-grade-i18n-source-standalone-browser.test.cjs tests/color-grade-inspector-layout-browser.test.cjs tests/color-grade-responsive-panels-browser.test.cjs",
+    "test:color-grade-candidate": "node --test tests/p3-5-candidate.test.cjs tests/p3-5-launcher.test.cjs tests/standalone-freshness.test.cjs tests/color-grade-i18n-candidate-browser.test.cjs",
+    "verify:standalone-release": "npm run build:standalone && npm run check:standalone && npm run test:color-grade-i18n-source-standalone && npm run test:p3-0:artifact && npm run package:standalone:artifact && npm run check:standalone-candidate && npm run test:color-grade-candidate",
+    "test:p3-1": "node scripts/acceptance-p3-1-color-core.cjs",
+    "test:p3-2": "node --test tests/p3-2-conversion.test.cjs",
+    "test:p3-3": "node --test tests/p3-3-studio-v2.test.cjs",
+    "test:p3-4": "node --test tests/p3-4-extended-lut.test.cjs",
+    "test:p3-5": "npm run package:standalone && node --test tests/p3-5-candidate.test.cjs tests/p3-5-launcher.test.cjs && node scripts/acceptance-p3-5-standalone.cjs && node scripts/benchmark-p3-5-authorized-images.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3",
+    "playwright": "^1.53.0",
+    "prettier": "^3.6.2",
+    "vite": "^6.1.0"
+  }
+}

@@ -1,0 +1,138 @@
+    <div
+      class="editor-toast"
+      id="editorToast"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      aria-hidden="true"
+    >
+      <span data-i18n="cg.static.importRequired">请先导入图片后再使用调色功能</span>
+    </div>
+    <div class="upload-modal" id="uploadModal" hidden>
+      <div class="upload-modal-backdrop" data-upload-close></div>
+      <section
+        class="upload-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="uploadDialogTitle"
+      >
+        <div class="upload-dialog-head">
+          <h2 id="uploadDialogTitle" data-i18n="cg.static.uploadLibrary">上传到图片库</h2>
+          <button
+            class="upload-dialog-close"
+            type="button"
+            data-upload-close
+            data-i18n-attr="aria-label:cg.static.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="upload-form">
+          <label for="uploadTitle" data-i18n="cg.static.imageTitle">图片标题</label>
+          <input
+            id="uploadTitle"
+            maxlength="200"
+            data-i18n-attr="placeholder:cg.static.enterTitle"
+          />
+          <label for="uploadDescription" data-i18n="cg.static.imageDescription">图片正文</label>
+          <textarea
+            id="uploadDescription"
+            maxlength="5000"
+            rows="4"
+            data-i18n-attr="placeholder:cg.static.enterDescription"
+          ></textarea>
+        </div>
+        <div class="upload-dialog-actions">
+          <button class="subtle" id="cancelUpload" type="button" data-i18n="cg.static.cancel">
+            取消
+          </button>
+          <button
+            class="primary"
+            id="confirmUpload"
+            type="button"
+            data-i18n="cg.static.confirmUpload"
+          >
+            确认上传
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="filter-modal" id="filterModal" hidden>
+      <div class="filter-modal-backdrop" data-filter-modal-close></div>
+      <section
+        class="filter-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filterDialogTitle"
+      >
+        <div class="upload-dialog-head">
+          <h2 id="filterDialogTitle" data-i18n="cg.static.editFilter">编辑我的滤镜</h2>
+          <button
+            class="upload-dialog-close"
+            type="button"
+            data-filter-modal-close
+            data-i18n-attr="aria-label:cg.static.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="upload-form">
+          <label for="filterEditName" data-i18n="cg.static.name">名称</label
+          ><input id="filterEditName" maxlength="120" />
+          <label for="filterEditBrand" data-i18n="cg.static.brand">品牌</label
+          ><input id="filterEditBrand" maxlength="80" />
+          <label for="filterEditAuthor" data-i18n="cg.static.author">作者</label
+          ><input id="filterEditAuthor" maxlength="120" />
+          <label for="filterEditSource" data-i18n="cg.static.sourceUrl">来源网址</label
+          ><input
+            id="filterEditSource"
+            type="url"
+            maxlength="500"
+            data-i18n-attr="placeholder:cg.static.optionalUrl"
+          />
+          <label for="filterEditScenes" data-i18n="cg.static.scenes">场景（以逗号分隔）</label
+          ><input id="filterEditScenes" maxlength="500" />
+          <label for="filterEditInputSpace" data-i18n="cg.static.inputSpace">输入色彩空间</label>
+          <select id="filterEditInputSpace">
+            <option value="sRGB SDR">sRGB SDR</option>
+            <option value="未知" data-i18n="cg.static.unknown">未知</option>
+          </select>
+          <label for="filterEditOutputSpace" data-i18n="cg.static.outputSpace">输出色彩空间</label>
+          <select id="filterEditOutputSpace">
+            <option value="sRGB SDR">sRGB SDR</option>
+            <option value="未知" data-i18n="cg.static.unknown">未知</option>
+          </select>
+          <label for="filterEditLicense" data-i18n="cg.static.license">许可说明</label
+          ><textarea id="filterEditLicense" maxlength="500" rows="2"></textarea>
+        </div>
+        <div
+          class="filter-delete-confirmation"
+          id="filterDeleteConfirmation"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          <p id="filterDeleteMessage"></p>
+          <button
+            class="subtle"
+            id="cancelFilterDelete"
+            type="button"
+            data-i18n="cg.static.cancelDelete"
+          >
+            取消删除
+          </button>
+        </div>
+        <div class="upload-dialog-actions">
+          <button class="subtle" id="deleteFilter" type="button" data-i18n="cg.static.delete">
+            删除
+          </button>
+          <span class="dialog-spacer"></span>
+          <button class="subtle" id="cancelFilterEdit" type="button" data-i18n="cg.static.cancel">
+            取消
+          </button>
+          <button class="primary" id="saveFilterEdit" type="button" data-i18n="cg.static.save">
+            保存
+          </button>
+        </div>
+      </section>
+    </div>

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Project-owned synthetic SDR color-review image set for P2 local research.",
+  "generatedOn": "2026-09-12",
+  "dimensions": [
+    960,
+    640
+  ],
+  "colorSpace": "sRGB SDR",
+  "assetType": "synthetic-color-review-image",
+  "checks": [
+    "grayscale",
+    "skin-tone-reference",
+    "sky-vegetation",
+    "saturated-color",
+    "highlight-rolloff"
+  ],
+  "source": {
+    "path": "docs/reference/p2-evidence/source-color-review.png",
+    "bytes": 2458646,
+    "sha256": "3f60a792d0bbea35b3b643abbc16434256d7a8e20def007b2e74f73a31629ddf"
+  },
+  "outputs": [
+    {
+      "id": "soft-portrait",
+      "preview": {
+        "path": "docs/reference/p2-evidence/soft-portrait-preview.png",
+        "bytes": 2458740,
+        "sha256": "2a28dd5628736ee2f087ef7a280fda9c5ddf46851b775ada9b85e39f0fa92b27"
+      },
+      "export": {
+        "path": "docs/reference/p2-evidence/soft-portrait-export.png",
+        "bytes": 2458739,
+        "sha256": "634b02610149b1765163e182403d717f743d6ca6b3eae2a7d1650a356d452f0b"
+      }
+    },
+    {
+      "id": "clear-landscape",
+      "preview": {
+        "path": "docs/reference/p2-evidence/clear-landscape-preview.png",
+        "bytes": 2458740,
+        "sha256": "f885f1be9e9950aac8c6304a352009480d039b7f1b4623eb1f81a95a758d97d6"
+      },
+      "export": {
+        "path": "docs/reference/p2-evidence/clear-landscape-export.png",
+        "bytes": 2458739,
+        "sha256": "edc376d4dba5ec800a14937bf25b845c50bbf32893cc195522e008e51a1850cb"
+      }
+    },
+    {
+      "id": "gentle-highlight",
+      "preview": {
+        "path": "docs/reference/p2-evidence/gentle-highlight-preview.png",
+        "bytes": 2458740,
+        "sha256": "9539918674d92118c8d65c697f7e725580eedd4bb29355ab28201f2c26bf735e"
+      },
+      "export": {
+        "path": "docs/reference/p2-evidence/gentle-highlight-export.png",
+        "bytes": 2458739,
+        "sha256": "b0925d6fe3c7502525489c43cbe2c0168b82b67c2beab91be35386be515e1879"
+      }
+    }
+  ]
+}

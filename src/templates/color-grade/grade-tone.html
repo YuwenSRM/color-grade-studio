@@ -1,0 +1,95 @@
+              <section
+                class="grade-tone-panel"
+                id="gradeTonePanel{{Tone}}"
+                role="tabpanel"
+                aria-labelledby="gradeTone{{Tone}}"
+{{hidden}}              >
+                <div class="grade-current-color-row">
+                  <button
+                    class="grade-current-color"
+                    type="button"
+                    data-grade-color-picker="{{tone}}"
+                    aria-controls="{{tone}}Color"
+                  >
+                    <span
+                      class="grade-current-color-swatch"
+                      data-grade-swatch="{{tone}}"
+                      aria-hidden="true"
+                    ></span
+                    ><span data-i18n="cg.static.currentColor">当前颜色</span>
+                  </button>
+                  <input
+                    class="wheel"
+                    id="{{tone}}Color"
+                    type="color"
+                    value="{{color}}"
+                    data-i18n-attr="aria-label:cg.static.{{tone}}Color"
+                    tabindex="-1"
+                  />
+                </div>
+                <div class="grade-value-fields" data-i18n-attr="aria-label:cg.static.hsl">
+                  <label class="grade-value-field" for="{{tone}}Hue"
+                    ><span data-i18n="cg.static.hue">色相</span
+                    ><input
+                      id="{{tone}}Hue"
+                      type="number"
+                      min="0"
+                      max="360"
+                      step="1"
+                      value="{{hue}}"
+                      data-i18n-attr="aria-label:cg.static.hueDegrees"
+                    /><small data-i18n="cg.static.degree">°</small></label
+                  >
+                  <label class="grade-value-field" for="{{tone}}Sat"
+                    ><span data-i18n="cg.static.saturation">饱和度</span
+                    ><input
+                      id="{{tone}}Sat"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value="{{saturation}}"
+                      data-i18n-attr="aria-label:cg.static.saturationPercent"
+                    /><small>%</small></label
+                  >
+                  <label class="grade-value-field" for="{{tone}}Light"
+                    ><span data-i18n="cg.static.lightness">明度</span
+                    ><input
+                      id="{{tone}}Light"
+                      type="number"
+                      min="-100"
+                      max="100"
+                      step="1"
+                      value="0"
+                      data-i18n-attr="aria-label:cg.static.lightnessRange"
+                    /><small data-i18n="cg.static.range">-100 至 +100</small></label
+                  >
+                </div>
+                <div class="grade-intensity-row">
+                  <label for="{{tone}}Amt" data-i18n="cg.static.colorIntensity">色彩强度</label
+                  ><input
+                    id="{{tone}}Amt"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensity"
+                  /><input
+                    id="{{tone}}AmtInput"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="0"
+                    data-i18n-attr="aria-label:cg.static.intensityPercent"
+                  /><span aria-hidden="true">%</span
+                  ><button
+                    class="control-reset"
+                    type="button"
+                    data-grade-reset="{{tone}}"
+                    data-i18n-attr="aria-label:cg.static.resetTone;title:cg.static.resetTone"
+                  >
+                    ↺
+                  </button>
+                </div>
+              </section>

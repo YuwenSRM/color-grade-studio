@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-09-15T08:31:57.589Z",
+  "environment": {
+    "node": "v18.19.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "initialRssBytes": 148807680
+  },
+  "scope": "P2 local exchange validation; the memory value is Node process RSS, not browser process memory.",
+  "hald": {
+    "cases": [
+      {
+        "inputPath": "tests/fixtures/luts/valid/identity-33.cube",
+        "sourceLutSha256": "7bbdf9a78a9724cc477b53b3ad8e209129c5092d56720d9364d6bd9669ddc7d3",
+        "gridSize": 33,
+        "hald": {
+          "level": 8,
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 1049481,
+          "sha256": "8a663ec7dcce3038c246a3badddcbbec17dec837f0c9ef757ca27b0a7405d03a",
+          "metadata": {
+            "Format": "real-landscape-hald-clut",
+            "Version": "1",
+            "HaldLevel": "8",
+            "Layout": "flat-red-fastest",
+            "ColorSpace": "sRGB SDR",
+            "SourceLutSha256": "7bbdf9a78a9724cc477b53b3ad8e209129c5092d56720d9364d6bd9669ddc7d3"
+          }
+        },
+        "elapsedMilliseconds": 189.7,
+        "maximumSampleError": 0.0018382352941176405,
+        "quantizationLimit": 0.00392156862745098,
+        "sourceValuesUnchanged": true
+      },
+      {
+        "inputPath": "tests/fixtures/luts/valid/identity-65.cube",
+        "sourceLutSha256": "e852818861463bc25fbe4845e44319a344a6c7cabc07228e4d02e02470792213",
+        "gridSize": 65,
+        "hald": {
+          "level": 8,
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 1049481,
+          "sha256": "153f89a612a62f642832b7ce3f22b0f004de925ca557ff7088d0d5f0cd9a7eb1",
+          "metadata": {
+            "Format": "real-landscape-hald-clut",
+            "Version": "1",
+            "HaldLevel": "8",
+            "Layout": "flat-red-fastest",
+            "ColorSpace": "sRGB SDR",
+            "SourceLutSha256": "e852818861463bc25fbe4845e44319a344a6c7cabc07228e4d02e02470792213"
+          }
+        },
+        "elapsedMilliseconds": 290.7,
+        "maximumSampleError": 0.0018382352941176405,
+        "quantizationLimit": 0.00392156862745098,
+        "sourceValuesUnchanged": true
+      }
+    ],
+    "cancellationHonored": true,
+    "incompatibleColorCode": "incompatible-color-space",
+    "customDomainCode": "unsupported-domain"
+  },
+  "threeDl": [
+    {
+      "id": "ocio-discreet-3dmesh-17",
+      "sourceSha256": "a2da0a7da5b54f0fc2453e69ad4732fc20802f902e6a29802230a5d74870dce1",
+      "status": "detected-unsupported",
+      "code": "unsupported-3dl-dialect",
+      "dialect": "discreet-3dmesh",
+      "gridSize": 17,
+      "outputRange": [
+        0,
+        4095
+      ],
+      "rowCountMatchesGrid": false
+    },
+    {
+      "id": "ocio-lustre-3dmesh-33",
+      "sourceSha256": "3920d37e4509fbfac2e47abe6ba4382eb649a882f9f87b9046b31ec2a57653be",
+      "status": "detected-unsupported",
+      "code": "unsupported-3dl-dialect",
+      "dialect": "lustre-3dmesh",
+      "gridSize": 33,
+      "outputRange": [
+        0,
+        4095
+      ],
+      "rowCountMatchesGrid": true
+    }
+  ]
+}

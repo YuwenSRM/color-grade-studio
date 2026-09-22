@@ -1,0 +1,284 @@
+        <section class="canvas-panel">
+          <div class="canvas-head">
+            <strong id="previewName" data-i18n="cg.static.preview">预览</strong>
+            <div class="preview-frame">
+              <label for="previewAspect" data-i18n="cg.static.frame">查看画框</label
+              ><select id="previewAspect">
+                <option value="auto" data-i18n="cg.static.fit">自适应</option>
+                <option value="3:2">3:2</option>
+                <option value="4:3">4:3</option>
+                <option value="1:1">1:1</option>
+                <option value="16:9">16:9</option>
+                <option value="9:16">9:16</option></select
+              ><span id="previewMeta" data-i18n="cg.static.addImage">请先添加一张图片</span>
+            </div>
+          </div>
+          <div class="photo-bar" id="photoBar">
+            <div class="file-meta"><b id="fileName"></b><span id="fileInfo"></span></div>
+            <label class="change-file"
+              ><span data-i18n="cg.static.replaceImage">更换图片</span
+              ><input id="fileInput" type="file" accept="image/*"
+            /></label>
+          </div>
+          <div
+            class="canvas-tools"
+            id="canvasTools"
+            data-i18n-attr="aria-label:cg.static.framingTools"
+          >
+            <div class="canvas-tool-row canvas-tool-row-primary">
+              <button
+                id="zoomOut"
+                type="button"
+                data-i18n-attr="title:cg.static.zoomOut;aria-label:cg.static.zoomOut"
+              >
+                -
+              </button>
+              <span class="zoom-value" id="zoomValue">100%</span>
+              <button
+                id="zoomIn"
+                type="button"
+                data-i18n-attr="title:cg.static.zoomIn;aria-label:cg.static.zoomIn"
+              >
+                +
+              </button>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <button
+                id="undoCrop"
+                type="button"
+                data-i18n="cg.static.undo"
+                data-i18n-attr="title:cg.static.undoCrop"
+                disabled
+              >
+                撤销
+              </button>
+              <button
+                id="cropReset"
+                type="button"
+                data-i18n="cg.static.reset"
+                data-i18n-attr="title:cg.static.resetFrame"
+              >
+                复位
+              </button>
+              <button
+                id="applyCrop"
+                class="tool-primary"
+                type="button"
+                data-i18n="cg.static.applyCrop"
+                data-i18n-attr="title:cg.static.applyCrop"
+              >
+                应用裁切
+              </button>
+            </div>
+            <div class="canvas-tool-row canvas-tool-row-secondary">
+              <div
+                class="compare-controls"
+                role="group"
+                data-i18n-attr="aria-label:cg.static.comparison"
+              >
+                <button
+                  class="active"
+                  id="compareEffect"
+                  type="button"
+                  data-i18n="cg.static.effect"
+                  data-i18n-attr="title:cg.static.effect"
+                  aria-pressed="true"
+                >
+                  效果
+                </button>
+                <button
+                  id="compareOriginal"
+                  type="button"
+                  data-i18n="cg.static.original"
+                  data-i18n-attr="title:cg.static.original"
+                  aria-pressed="false"
+                >
+                  原图
+                </button>
+                <button
+                  id="compareSplitVertical"
+                  type="button"
+                  data-i18n="cg.static.splitVertical"
+                  data-i18n-attr="title:cg.static.splitVertical"
+                  aria-pressed="false"
+                >
+                  左右
+                </button>
+                <button
+                  id="compareSplitHorizontal"
+                  type="button"
+                  data-i18n="cg.static.splitHorizontal"
+                  data-i18n-attr="title:cg.static.splitHorizontal"
+                  aria-pressed="false"
+                >
+                  上下
+                </button>
+              </div>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <span class="tool-label" data-i18n="cg.static.cropAspect">画幅裁切</span>
+              <select id="cropAspect" data-i18n-attr="aria-label:cg.static.cropAspect">
+                <option value="native" data-i18n="cg.static.originalAspect">原始画幅</option>
+                <option value="3:2" data-i18n="cg.static.crop32">3:2 相机常用</option>
+                <option value="4:3" data-i18n="cg.static.crop43">4:3 标准照片</option>
+                <option value="1:1" data-i18n="cg.static.crop11">1:1 方形</option>
+                <option value="16:9" data-i18n="cg.static.crop169">16:9 横向宽屏</option>
+                <option value="2.35:1" data-i18n="cg.static.crop235">2.35:1 电影宽画幅</option>
+                <option value="9:16" data-i18n="cg.static.crop916">9:16 竖向全屏</option>
+                <option value="custom" data-i18n="cg.static.customCrop">自定义裁切</option>
+              </select>
+              <span class="crop-hint" id="cropHint" data-i18n="cg.static.cropHint"
+                >放大后可裁切画面</span
+              >
+            </div>
+          </div>
+          <div id="importStatus" class="import-status" role="status" aria-live="polite" hidden>
+            <span id="importMessage" data-i18n="cg.static.importing">正在读取图片…</span>
+            <button
+              id="cancelImport"
+              class="subtle"
+              type="button"
+              data-i18n="cg.static.cancelImport"
+            >
+              取消导入
+            </button>
+          </div>
+          <div class="stage empty" id="stage" tabindex="0">
+            <canvas id="mainCanvas"></canvas>
+            <canvas id="interactiveCanvas" aria-hidden="true"></canvas>
+            <canvas id="comparisonCanvas" aria-hidden="true"></canvas>
+            <div
+              id="comparisonDivider"
+              class="comparison-divider"
+              role="slider"
+              data-i18n-attr="aria-label:cg.static.comparison"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-orientation="vertical"
+              tabindex="0"
+              hidden
+            ></div>
+            <div class="crop-box" id="cropBox" aria-hidden="true">
+              <i class="crop-handle nw" data-handle="nw"></i
+              ><i class="crop-handle ne" data-handle="ne"></i
+              ><i class="crop-handle sw" data-handle="sw"></i
+              ><i class="crop-handle se" data-handle="se"></i>
+            </div>
+            <span class="crop-live-hint" id="cropLiveHint" data-i18n="cg.static.cropHint"
+              >放大后可裁切画面</span
+            >
+            <div class="empty-state" id="empty">
+              <div class="drop-icon">+</div>
+              <b data-i18n="cg.static.dropImage">拖入一张风景照片</b
+              ><span data-i18n="cg.static.chooseOrPaste">或点击选择图片，也可以直接粘贴截图。</span
+              ><label class="file-button"
+                ><span data-i18n="cg.static.chooseImage">选择图片</span
+                ><input id="emptyFileInput" type="file" accept="image/*"
+              /></label>
+            </div>
+          </div>
+          <div class="filter-intensity" id="filterIntensity" hidden>
+            <div class="filter-intensity-head">
+              <label for="filterIntensityInput" data-i18n="cg.static.filterStrength"
+                >滤镜强度</label
+              >
+              <output id="filterIntensityValue" for="filterIntensityInput">100%</output>
+            </div>
+            <div class="filter-intensity-control">
+              <span class="filter-intensity-endpoint" data-i18n="cg.static.originalZero"
+                >原图 0%</span
+              >
+              <input
+                id="filterIntensityInput"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="100"
+                aria-valuetext="100%"
+              />
+              <span class="filter-intensity-endpoint" data-i18n="cg.static.completeFilter"
+                >完整滤镜 100%</span
+              >
+            </div>
+            <p
+              class="filter-intensity-status"
+              id="filterIntensityStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <p class="filter-intensity-reason" id="filterIntensityReason" hidden></p>
+          </div>
+          <div class="actions">
+            <div class="publish-fields" id="publishFields">
+              <label for="publishTitle" data-i18n="cg.static.imageTitle">图片标题</label>
+              <input
+                id="publishTitle"
+                maxlength="200"
+                data-i18n-attr="placeholder:cg.static.enterTitle"
+                disabled
+              />
+              <label for="publishDescription" data-i18n="cg.static.imageDescription"
+                >图片正文</label
+              >
+              <textarea
+                id="publishDescription"
+                maxlength="5000"
+                rows="3"
+                data-i18n-attr="placeholder:cg.static.enterDescription"
+                disabled
+              ></textarea>
+            </div>
+            <label class="download-select" for="downloadSpec">
+              <span data-i18n="cg.static.downloadSpec">下载规格</span>
+              <select id="downloadSpec" disabled>
+                <option value="original" data-i18n="cg.static.gradedOriginal">
+                  原图（已调色）
+                </option>
+                <option value="high" selected data-i18n="cg.static.high">高清</option>
+                <option value="standard" data-i18n="cg.static.standard">标准</option>
+                <option value="web" data-i18n="cg.static.web">网页</option>
+                <option value="preview" data-i18n="cg.static.previewSize">预览</option>
+              </select>
+            </label>
+            <button class="download" id="download" disabled data-i18n="cg.static.download">
+              下载图像</button
+            ><button
+              class="subtle"
+              id="cancelExport"
+              type="button"
+              disabled
+              hidden
+              data-i18n="cg.static.cancelExport"
+            >
+              取消导出</button
+            ><button
+              class="subtle"
+              id="exportHald"
+              type="button"
+              data-i18n="cg.static.exportHald"
+              data-i18n-attr="title:cg.static.exportHaldTitle"
+              disabled
+            >
+              导出 Hald CLUT</button
+            ><button
+              class="subtle"
+              id="cancelHald"
+              type="button"
+              disabled
+              hidden
+              data-i18n="cg.static.cancelHald"
+            >
+              取消 Hald</button
+            ><button class="primary" id="uploadToLibrary" disabled data-i18n="cg.static.upload">
+              上传入库</button
+            ><span class="status" id="status" role="status" aria-live="polite"></span
+            ><span
+              class="status"
+              id="haldInfo"
+              role="status"
+              aria-live="polite"
+              data-i18n="cg.static.haldInfo"
+              >Hald CLUT：选择已验证的 3D LUT 后可导出</span
+            >
+          </div>
+        </section>

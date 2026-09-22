@@ -1,0 +1,12 @@
+node_modules/
+dist/
+tests/fixtures/luts/manifest.json
+assets/color-grade/p2-builtin-filters/manifest.json
+docs/reference/p2-evidence/manifest.json
+docs/reference/p2-evidence/p2-exchange-acceptance.json
+docs/reference/p2-evidence/p2-browser-acceptance.json
+data/
+image-library/imports/
+image-library/originals/
+uploads/
+.env
